@@ -17,20 +17,17 @@ const Ranking: React.FC = () => {
 
     const validateAndFetchRankings = async () => {
       try {
-        // 验证会话有效性
-        if (!currentUser) {
-          navigate('/login');
-          return;
-        }
-
-        const isValidSession = await authService.validateSession();
-        if (!isValidSession) {
-          navigate('/login');
-          return;
-        }
-
         setLoading(true);
         setError('');
+
+        // 如果用户已登录，验证会话有效性
+        if (currentUser) {
+          const isValidSession = await authService.validateSession();
+          if (!isValidSession) {
+            authService.logout();
+            // 不强制跳转，让用户继续浏览排行榜
+          }
+        }
 
         // 获取排行榜数据
         const rankingsData = await rankingService.getRankings();
@@ -38,8 +35,16 @@ const Ranking: React.FC = () => {
 
         // 如果用户已登录，获取用户排名
         if (currentUser) {
-          const userRankingData = await rankingService.getUserRanking(currentUser);
-          setUserRanking(userRankingData);
+          try {
+            const userRankingData = await rankingService.getUserRanking(currentUser);
+            setUserRanking(userRankingData);
+          } catch (err: any) {
+            console.error('获取用户排名失败:', err);
+            // 如果是授权相关错误，清除登录状态
+            if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
+              authService.logout();
+            }
+          }
         }
 
         // 订阅排行榜更新
@@ -54,21 +59,14 @@ const Ranking: React.FC = () => {
             }
           } catch (err: any) {
             console.error('更新排行榜失败:', err);
-            // 如果是授权相关错误，跳转到登录页面
+            // 如果是授权相关错误，清除登录状态
             if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
               authService.logout();
-              navigate('/login');
             }
           }
         });
       } catch (err: any) {
         console.error('获取排行榜失败:', err);
-        // 如果是授权相关错误，跳转到登录页面
-        if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
-          authService.logout();
-          navigate('/login');
-          return;
-        }
         setError('获取排行榜数据失败，请刷新页面重试');
       } finally {
         setLoading(false);
@@ -108,9 +106,44 @@ const Ranking: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 relative">
+      {/* 登录/退出按钮 */}
+      <div className="absolute top-4 right-4">
+        {currentUser ? (
+          <button
+            onClick={() => {
+              authService.logout();
+              navigate('/login');
+            }}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            退出登录
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('/login')}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            登录
+          </button>
+        )}
+      </div>
+
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">排行榜</h1>
+
+        {/* 未登录提示 */}
+        {!currentUser && (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-center">
+            <p className="text-blue-800 mb-4">登录后查看您的排名和积分</p>
+            <button
+              onClick={() => navigate('/login')}
+              className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+            >
+              立即登录
+            </button>
+          </div>
+        )}
 
         {/* 当前用户排名 */}
         {currentUser && userRanking && (

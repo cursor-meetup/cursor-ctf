@@ -35,30 +35,24 @@ const Home: React.FC = () => {
   useEffect(() => {
     const validateAndLoadData = async () => {
       try {
-        // 验证会话有效性
-        const isValidSession = await authService.validateSession();
-        if (!isValidSession) {
-          logout();
-          navigate('/login');
-          return;
+        // 如果用户已登录，验证会话有效性并加载数据
+        if (currentUser) {
+          const isValidSession = await authService.validateSession();
+          if (!isValidSession) {
+            logout();
+            setSessionLoading(false);
+            return;
+          }
+          // 加载用户数据
+          await loadUserData();
         }
-
-        // 加载用户数据
-        await loadUserData();
       } catch (error) {
         console.error('Session validation failed:', error);
         logout();
-        navigate('/login');
       } finally {
         setSessionLoading(false);
       }
     };
-
-    if (!currentUser) {
-      logout();
-      navigate('/login');
-      return;
-    }
 
     validateAndLoadData();
   }, [currentUser, logout, navigate]);
@@ -76,7 +70,6 @@ const Home: React.FC = () => {
         if (userError.code === 'PGRST116') {
           // 用户不存在，可能是会话过期
           logout();
-          navigate('/login');
           return;
         }
         throw userError;
@@ -102,16 +95,22 @@ const Home: React.FC = () => {
       );
     } catch (error: any) {
       console.error('加载用户数据失败:', error);
-      // 如果是授权相关错误，跳转到登录页面
+      // 如果是授权相关错误，清除登录状态
       if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
         logout();
-        navigate('/login');
       }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // 检查是否已登录
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -174,6 +173,10 @@ const Home: React.FC = () => {
     navigate('/login');
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   // 如果正在验证会话，显示加载状态
   if (sessionLoading) {
     return (
@@ -188,15 +191,25 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* 退出登录按钮 */}
+      {/* 登录/退出按钮 */}
       <div className="absolute top-4 right-4">
-        <button
-          onClick={handleLogout}
-          disabled={loading}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
-        >
-          退出登录
-        </button>
+        {currentUser ? (
+          <button
+            onClick={handleLogout}
+            disabled={loading}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            退出登录
+          </button>
+        ) : (
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            登录
+          </button>
+        )}
       </div>
 
       <div className="flex flex-col items-center justify-center min-h-screen px-6">

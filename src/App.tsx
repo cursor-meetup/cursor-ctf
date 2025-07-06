@@ -18,29 +18,13 @@ const AppContent = () => {
         <Route path="/login" element={
           isAuthenticated ? <Navigate to="/" replace /> : <Login />
         } />
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        } />
-        <Route path="/venue" element={
-          <ProtectedRoute>
-            <Venue />
-          </ProtectedRoute>
-        } />
-        <Route path="/gallery" element={
-          <ProtectedRoute>
-            <Gallery />
-          </ProtectedRoute>
-        } />
-        <Route path="/ranking" element={
-          <ProtectedRoute>
-            <Ranking />
-          </ProtectedRoute>
-        } />
+        <Route path="/" element={<Home />} />
+        <Route path="/venue" element={<Venue />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/ranking" element={<Ranking />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      {isAuthenticated && <BottomNav />}
+      <BottomNav />
     </div>
   );
 };
