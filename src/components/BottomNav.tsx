@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const navs = [
   { label: "首页", path: "/", icon: "🏠" },
-  { label: "场地管理", path: "/venue", icon: "📍" },
+  { label: "指引", path: "/venue", icon: "📍" },
   { label: "展示", path: "/gallery", icon: "🖼️" },
   { label: "排名", path: "/ranking", icon: "🏆" },
 ];
@@ -35,13 +35,13 @@ const BottomNav = () => {
       ))}
       
       {/* 退出登录按钮 */}
-      <button
+      {/* <button
         onClick={handleLogout}
         className="flex flex-col items-center justify-center text-xs font-medium transition-colors duration-200 px-2 py-2 rounded-lg text-gray-500 hover:text-red-600"
       >
         <span className="text-lg mb-1">🚪</span>
         <span className="text-xs">退出</span>
-      </button>
+      </button> */}
     </nav>
   );
 };

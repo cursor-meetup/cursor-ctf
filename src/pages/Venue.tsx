@@ -6,8 +6,8 @@ const Venue = () => {
       <div className="max-w-md mx-auto">
         {/* 页面标题 */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">场地管理</h1>
-          <p className="text-gray-600">查看和管理比赛场地信息</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">入场指引</h1>
+          <p className="text-gray-600">欢迎每一位Cursor Meetup Hangzhou的参与者</p>
         </div>
         
         {/* 场地信息卡片 */}
@@ -24,8 +24,8 @@ const Venue = () => {
           
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">主比赛场地</h3>
-              <p className="text-gray-600">地址：北京市海淀区中关村南大街5号</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Cursor Meetup Hangzhou场地</h3>
+              <p className="text-gray-600">地址：杭州市余杭区梦想小镇互联网村21幢</p>
             </div>
             
             <div className="border-t border-gray-100 pt-4">
@@ -48,9 +48,9 @@ const Venue = () => {
           <button className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200">
             查看详细信息
           </button>
-          <button className="w-full py-3 bg-white text-black font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors duration-200">
+          {/* <button className="w-full py-3 bg-white text-black font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors duration-200">
             预订场地
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
