@@ -9,7 +9,8 @@ interface InputDialogProps {
 const InputDialog: React.FC<InputDialogProps> = ({ open, result, onClose }) => {
   if (!open) return null;
   
-  const isSuccess = result === "匹配成功";
+  const isSuccess = !result.includes("不正确") && !result.includes("已经提交");
+  const resultLines = result.split('\n');
   
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
@@ -26,14 +27,16 @@ const InputDialog: React.FC<InputDialogProps> = ({ open, result, onClose }) => {
           {isSuccess ? "验证成功！" : "验证失败"}
         </h3>
         
-        <p className={`text-lg mb-6 ${
-          isSuccess ? "text-green-600" : "text-red-600"
-        }`}>
-          {result}
-        </p>
+        {resultLines.map((line, index) => (
+          <p key={index} className={`text-lg ${index === 0 ? "mb-2" : "mb-1"} ${
+            isSuccess ? "text-green-600" : "text-red-600"
+          }`}>
+            {line}
+          </p>
+        ))}
         
         <button 
-          className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200"
+          className="w-full py-3 mt-6 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200"
           onClick={onClose}
         >
           确定

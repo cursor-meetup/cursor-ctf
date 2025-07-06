@@ -1,0 +1,29 @@
+{
+  "flags": [
+    {
+      "key": "ctf2024",
+      "points": 100,
+      "description": "欢迎来到 Cursor Meetup Hangzhou"
+    },
+    {
+      "key": "cursor_hz_2024",
+      "points": 200,
+      "description": "在页面中发现隐藏的信息"
+    },
+    {
+      "key": "meetup_secret",
+      "points": 300,
+      "description": "完成场地打卡任务"
+    },
+    {
+      "key": "gallery_hunter",
+      "points": 400,
+      "description": "在图库中找到特殊标记"
+    },
+    {
+      "key": "final_challenge",
+      "points": 500,
+      "description": "完成最终挑战"
+    }
+  ]
+}
