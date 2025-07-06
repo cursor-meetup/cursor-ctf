@@ -292,7 +292,7 @@ const Ranking: React.FC = () => {
 
         {/* 当前用户排名 */}
         {currentUser && userRanking && (
-          <div className="bg-black shadow-lg rounded-lg p-6 mb-8">
+          <div className="bg-black shadow-lg rounded-lg p-6 mb-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
                 <p className="text-sm text-gray-400">当前排名</p>
