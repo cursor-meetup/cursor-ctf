@@ -90,6 +90,11 @@ select:focus {
   animation: shake 0.5s ease-in-out;
 }
 
+/* 背景滚动动画 */
+.animate-scroll-bg {
+  animation: scrollBackground 15s linear infinite;
+}
+
 @keyframes fadeInLogin {
   from {
     opacity: 0;
@@ -134,6 +139,15 @@ select:focus {
   }
   20%, 40%, 60%, 80% {
     transform: translateX(5px);
+  }
+}
+
+@keyframes scrollBackground {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

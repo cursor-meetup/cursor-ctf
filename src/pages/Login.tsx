@@ -72,15 +72,33 @@ const Login = () => {
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4">
       {/* 背景图片层 */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(/cursor.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="animate-scroll-bg" style={{ height: '200vh' }}>
+          {/* 第一个背景图片 */}
+          <div 
+            className="absolute inset-x-0 top-0"
+            style={{
+              backgroundImage: 'url(/cursor.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              height: '100vh'
+            }}
+          />
+          {/* 第二个背景图片 */}
+          <div 
+            className="absolute inset-x-0"
+            style={{
+              backgroundImage: 'url(/cursor.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              height: '100vh',
+              top: '100vh'
+            }}
+          />
+        </div>
+      </div>
       
       {/* 毛玻璃效果覆盖层 */}
       <div className="absolute inset-0 backdrop-blur-sm" />
@@ -93,9 +111,9 @@ const Login = () => {
         {/* 标题区域 */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-100 mb-2">
+            {/* <h1 className="text-3xl font-bold text-gray-100 mb-2">
               Cursor Meetup Hangzhou
-            </h1>
+            </h1> */}
             <p className="text-gray-200 text-sm">
               {isLoginMode ? '登录您的账户' : '创建新账户'}
             </p>
@@ -107,7 +125,7 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* 用户名输入 */}
             <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-900">
                 用户名
               </label>
               <input
@@ -125,7 +143,7 @@ const Login = () => {
 
             {/* 密码输入 */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900">
                 密码
               </label>
               <input
