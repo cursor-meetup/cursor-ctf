@@ -22,6 +22,15 @@ const Home: React.FC = () => {
   const [unlockedFlags, setUnlockedFlags] = useState<UnlockedFlag[]>([]);
   const [loading, setLoading] = useState(false);
   const [sessionLoading, setSessionLoading] = useState(true);
+  const [username, setUsername] = useState<string>("");
+
+  useEffect(() => {
+    // 从 localStorage 获取用户名
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   useEffect(() => {
     const validateAndLoadData = async () => {
@@ -77,7 +86,7 @@ const Home: React.FC = () => {
       // 获取已解锁的 flags
       const { data: flagsData, error: flagsError } = await supabase
         .from('user_flags')
-        .select('flag_key, points, created_at')
+        .select('flag_key, points, unlocked_at')
         .eq('username', currentUser);
 
       if (flagsError) {
@@ -88,7 +97,7 @@ const Home: React.FC = () => {
         flagsData.map(item => ({
           flag_key: item.flag_key,
           points: item.points,
-          unlocked_at: item.created_at,
+          unlocked_at: item.unlocked_at,
         }))
       );
     } catch (error: any) {
@@ -194,6 +203,7 @@ const Home: React.FC = () => {
         <div className="w-full max-w-md">
           {/* 标题 */}
           <div className="text-center mb-8">
+            {username && <p className="text-xl text-gray-700 mb-2">Hi，{username} 欢迎来到</p>}
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Cursor Meetup Hangzhou</h1>
             <p className="text-gray-600">请输入正确的口令以继续</p>
             {totalPoints > 0 && <p className="text-lg font-semibold text-black mt-4">当前积分: {totalPoints}</p>}
