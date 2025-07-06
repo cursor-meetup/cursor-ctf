@@ -19,6 +19,7 @@ const Home: React.FC = () => {
   const { currentUser, logout } = useAuth();
   const [input, setInput] = useState("");
   const [showDialog, setShowDialog] = useState(false);
+  const [showActivityDialog, setShowActivityDialog] = useState(false);
   const [result, setResult] = useState("");
   const [totalPoints, setTotalPoints] = useState(0);
   const [unlockedFlags, setUnlockedFlags] = useState<UnlockedFlag[]>([]);
@@ -183,6 +184,18 @@ const Home: React.FC = () => {
     navigate('/login');
   };
 
+  const handleCopyFlag = async () => {
+    try {
+      // 这里可以根据需要复制特定的flag或者所有flag
+      const allFlags = flagConfig.flags.map(flag => flag.key).join('\n');
+      await navigator.clipboard.writeText(allFlags);
+      alert('Flag内容已复制到剪贴板');
+    } catch (error) {
+      console.error('复制失败:', error);
+      alert('复制失败，请手动复制');
+    }
+  };
+
   // 如果正在验证会话，显示加载状态
   if (sessionLoading) {
     return (
@@ -221,7 +234,7 @@ const Home: React.FC = () => {
         )}
       </div>
 
-      <div className="flex flex-col items-center justify-center min-h-screen px-6">
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 pb-20">
         <div className="w-full max-w-md">
           {/* 标题 */}
           <div className="text-center mb-8">
@@ -251,6 +264,16 @@ const Home: React.FC = () => {
               {loading ? '验证中...' : '提交验证'}
             </button>
           </form>
+
+          {/* 活动说明按钮 */}
+          <div className="mt-6">
+            <button
+              onClick={() => setShowActivityDialog(true)}
+              className="w-full py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors duration-200 text-lg border-2 border-gray-200"
+            >
+              活动说明
+            </button>
+          </div>
           
           {/* 提示信息 */}
           <div className="mt-8 mb-8 text-center">
@@ -289,6 +312,96 @@ const Home: React.FC = () => {
           onClose={() => setShowDialog(false)}
           onSubmit={() => {}} // 这里不需要处理提交，因为主要的提交逻辑在表单中
         />
+
+        {/* 活动说明弹窗 */}
+        {showActivityDialog && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900">活动说明</h2>
+                  <button
+                    onClick={() => setShowActivityDialog(false)}
+                    className="text-gray-400 hover:text-gray-600 text-2xl"
+                  >
+                    ×
+                  </button>
+                </div>
+                
+                {/* 活动说明内容区域 - 预留足够大的空间 */}
+                <div className="min-h-[400px] max-h-[60vh] overflow-y-auto bg-gray-50 p-6 rounded-lg mb-6">
+                  <div className="text-gray-800 leading-relaxed">
+                    <h3 className="text-xl font-bold text-center mb-6 text-red-600">
+                      ❤️‍🔥Cursor Meetup Hangzhou玩转攻略
+                    </h3>
+                    
+                    <div className="mb-6">
+                      <p className="text-lg font-medium mb-2">想领取超酷的Cursor纪念币？</p>
+                      <p className="text-lg font-medium mb-4">想集齐4款Cursor限量贴纸？</p>
+                      
+                      <div className="bg-green-50 p-4 rounded-lg mb-4">
+                        <p className="text-green-800 font-medium">✅完成任意一个分享任务，即可领取1枚Cursor纪念币（限前200名，每人仅限1枚）！</p>
+                        <p className="text-green-800 font-medium">✅完成每一项分享任务，领取1款Cursor限量贴纸！</p>
+                      </div>
+                      
+                      <div className="bg-red-50 p-4 rounded-lg mb-6">
+                        <p className="text-red-800 font-bold text-center">❗❗完成后，分享到群里，方便验证❗❗</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-pink-400">
+                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈或微信群/飞书群里。</h4>
+                        <p className="text-pink-600 font-medium">💖 完成后，可领取 1 款 Cursor限量贴纸！</p>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-400">
+                        <h4 className="font-bold text-lg mb-3">❷选你最爱的平台，分享你的参会热情！</h4>
+                        <ul className="space-y-2 mb-3">
+                          <li className="flex items-start">
+                            <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                            <span><strong>X (Twitter)：</strong> @Benlang #CursorMeetupHangzhou，告诉大家你来啦！</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                            <span><strong>小红书：</strong> 发篇图文或视频，@CursorInsider #CursorMeetupHangzhou，晒晒你的 Meetup 瞬间！</span>
+                          </li>
+                        </ul>
+                        <p className="text-yellow-600 font-medium">💛分享成功，领取1款Cursor限量贴纸！（双平台分享可领取2款）</p>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-green-400">
+                        <h4 className="font-bold text-lg mb-2">❸嘉宾Q&A环节：交流互动，碰撞思路</h4>
+                        <p className="text-green-600 font-medium">💚参与互动，可领取1款Cursor 限量贴纸！</p>
+                      </div>
+
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-blue-400">
+                        <h4 className="font-bold text-lg mb-2">❹参与官方连线环节，把你使用Cursor产品的真实感受、建议或遇到的问题，统统告诉我们！你的声音超重要！</h4>
+                        <p className="text-blue-600 font-medium">💙可领取2款Cursor限量贴纸！可指定其中一款 ✨</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 底部按钮 */}
+                <div className="flex justify-end gap-3">
+                  <button
+                    onClick={() => setShowActivityDialog(false)}
+                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    关闭
+                  </button>
+                  <button
+                    onClick={handleCopyFlag}
+                    className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                  >
+                    复制flag
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

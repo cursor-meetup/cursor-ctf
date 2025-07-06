@@ -3,7 +3,7 @@ import MeteorBackground from "../components/MeteorBackground";
 
 const Venue = () => {
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-8 relative">
+    <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
       
@@ -61,6 +61,104 @@ const Venue = () => {
           {/* <button className="w-full py-3 bg-white text-black font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors duration-200">
             预订场地
           </button> */}
+        </div>
+
+        {/* 活动时间表 */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 mt-6 border border-gray-100">
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">今日活动时间表</h3>
+            <p className="text-gray-600 text-sm">Cursor Meetup Hangzhou 完整议程</p>
+          </div>
+          
+          <div className="space-y-4 max-h-96 overflow-y-auto">
+            <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-gray-700">13:30-14:20</div>
+              <div className="flex-1 text-sm text-gray-800">签到</div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-blue-700">14:00-14:10</div>
+              <div className="flex-1 text-sm text-gray-800">开场</div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">14:10-14:25</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">覃貌Tim</div>
+                <div>用Cursor突破无代码工具的天花板</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">14:25-14:40</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">白袍</div>
+                <div>Everything is about Html manipulation - experience of content producing with cursor/内容生产本质上就是 HTML 操作 —— 结合 Cursor 的实际使用经</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">14:40-15:05</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">Ray</div>
+                <div>Startup at 14: How Cursor Became My AI Co-Founder</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-purple-700">15:05-15:30</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">Ray-官方连线</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-yellow-700">15:30-16:00</div>
+              <div className="flex-1 text-sm text-gray-800">集体合影&茶歇</div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">16:00-16:15</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">负一</div>
+                <div>用Cursor写脱口秀</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">16:15-16:30</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">SHINJI</div>
+                <div>不会写一行代码的产品经理，如何用Cursor搭建一个短视频全链路创作网站</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">16:30-16:45</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">Zy</div>
+                <div>Vibe Coding, or Vibe over Coding？使用Cursor 的一些思考</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-green-700">16:45-17:00</div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">DH</div>
+                <div>用cursor搓出一款日活过万的旅行产品</div>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-orange-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-orange-700">17:00-17:30</div>
+              <div className="flex-1 text-sm text-gray-800">抽奖 & 自由讨论</div>
+            </div>
+            
+            <div className="flex items-start space-x-3 p-3 bg-pink-50 rounded-lg">
+              <div className="flex-shrink-0 w-20 text-sm font-medium text-pink-700">17:30-18:00</div>
+              <div className="flex-1 text-sm text-gray-800">自由 Networking 时间 & 离场</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
