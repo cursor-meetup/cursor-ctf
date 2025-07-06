@@ -13,7 +13,7 @@ const AppContent = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className="pb-16">
+    <div >
       <Routes>
         <Route path="/login" element={
           isAuthenticated ? <Navigate to="/" replace /> : <Login />
