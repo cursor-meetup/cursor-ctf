@@ -306,6 +306,20 @@ select:focus {
   }
 }
 
+/* 按钮脉冲动画 */
+.animate-pulse-scale {
+  animation: pulseScale 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   html {

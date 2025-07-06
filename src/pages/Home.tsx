@@ -186,14 +186,16 @@ const Home: React.FC = () => {
 
   const handleCopyFlag = async () => {
     try {
-      // 这里可以根据需要复制特定的flag或者所有flag
-      const allFlags = flagConfig.flags.map(flag => flag.key).join('\n');
-      await navigator.clipboard.writeText(allFlags);
-      alert('Flag内容已复制到剪贴板');
+      // 复制专属flag
+      const specialFlag = 'hzcursor2025';
+      await navigator.clipboard.writeText(specialFlag);
+      alert('Flag已复制到剪贴板！快去首页输入框试试吧！');
     } catch (error) {
       console.error('复制失败:', error);
-      alert('复制失败，请手动复制');
+      alert('复制失败，请手动复制：hzcursor2025');
     }
+    setShowActivityDialog(false);
+    setInput('hzcursor2025');
   };
 
   // 如果正在验证会话，显示加载状态
@@ -209,12 +211,12 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="min-h-screen pt-20 bg-gray-50 relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
       
       {/* 登录/退出按钮 */}
-      <div className="absolute top-4 right-4">
+      <div className="fixed top-4 right-4">
         {currentUser ? (
           <button
             onClick={handleLogout}
@@ -259,7 +261,9 @@ const Home: React.FC = () => {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full py-4 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`w-full py-4 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 text-lg disabled:opacity-50 disabled:cursor-not-allowed ${
+                input === 'hzcursor2025' ? 'animate-pulse-scale' : ''
+              }`}
             >
               {loading ? '验证中...' : '提交验证'}
             </button>
@@ -340,12 +344,12 @@ const Home: React.FC = () => {
                       <p className="text-lg font-medium mb-4">想集齐4款Cursor限量贴纸？</p>
                       
                       <div className="bg-green-50 p-4 rounded-lg mb-4">
-                        <p className="text-green-800 font-medium">✅完成任意一个分享任务，即可领取1枚Cursor纪念币（限前200名，每人仅限1枚）！</p>
-                        <p className="text-green-800 font-medium">✅完成每一项分享任务，领取1款Cursor限量贴纸！</p>
+                        <p className="text-green-800 font-medium">✅完成以下任意一个任务，即可领取1枚Cursor纪念币（限前200名，每人仅限1枚）！</p>
+                        <p className="text-green-800 font-medium">✅完成每一项任务，都可以领取1款Cursor限量贴纸！</p>
                       </div>
                       
                       <div className="bg-red-50 p-4 rounded-lg mb-6">
-                        <p className="text-red-800 font-bold text-center">❗❗完成后，分享到群里，方便验证❗❗</p>
+                        <p className="text-red-800 font-bold text-center">完成后，分享到群里，方便验证</p>
                       </div>
                     </div>
 
@@ -379,6 +383,19 @@ const Home: React.FC = () => {
                         <h4 className="font-bold text-lg mb-2">❹参与官方连线环节，把你使用Cursor产品的真实感受、建议或遇到的问题，统统告诉我们！你的声音超重要！</h4>
                         <p className="text-blue-600 font-medium">💙可领取2款Cursor限量贴纸！可指定其中一款 ✨</p>
                       </div>
+
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-purple-400">
+                        <h4 className="font-bold text-lg mb-3">❺尽可能地收集flag，最终17:00后排名前20的同学可以到签到台换取限量Cursor纪念币一枚。</h4>
+                        <div className="bg-purple-50 p-3 rounded-lg mb-3">
+                          <p className="text-sm text-gray-700 mb-2">这里赠送大家一个Flag，复制后粘贴到首页的输入框中，即可获取积分。Have fun！</p>
+                          <div className="bg-white p-2 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700">
+                            hzcursor2025
+                          </div>
+                        </div>
+                        <p className="text-purple-600 font-medium">💜 Flag收集挑战，冲击前20名！</p>
+                      </div>
+
+                      
                     </div>
                   </div>
                 </div>
@@ -389,7 +406,7 @@ const Home: React.FC = () => {
                     onClick={() => setShowActivityDialog(false)}
                     className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
                   >
-                    关闭
+                    关闭弹窗
                   </button>
                   <button
                     onClick={handleCopyFlag}
