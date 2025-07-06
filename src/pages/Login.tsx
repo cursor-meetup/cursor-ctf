@@ -26,6 +26,10 @@ const Login = () => {
       setError('请输入用户名');
       return false;
     }
+    if (username.trim().length > 11) {
+      setError('用户名不能超过11个字符');
+      return false;
+    }
     if (!password.trim()) {
       setError('请输入密码');
       return false;
@@ -102,17 +106,23 @@ const Login = () => {
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 用户名
               </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
-                placeholder="输入用户名"
-                disabled={loading}
-              />
+              <div className="relative">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  maxLength={11}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
+                  placeholder="可以随意定义，不能和他人重复"
+                  disabled={loading}
+                />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400 pointer-events-none">
+                  {username.length}/11
+                </div>
+              </div>
             </div>
 
             {/* 密码输入 */}
