@@ -16,14 +16,20 @@ const Venue = () => {
         
         {/* 场地信息卡片 */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
-          <div 
-            className="w-full rounded-xl bg-gray-200 flex items-center justify-center mb-4"
-            style={{ aspectRatio: "16/9" }}
-          >
-            <div className="text-center text-gray-500">
-              <div className="text-4xl mb-2">📍</div>
-              <span>场地图片</span>
-            </div>
+          <div className="w-full rounded-xl overflow-hidden mb-4">
+            <a 
+              href="https://www.amap.com/place/B0FFKZFTVG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block hover:opacity-90 transition-opacity duration-200"
+            >
+                              <img 
+                  src="https://restapi.amap.com/v3/staticmap?location=120.005060,30.292772&zoom=17&size=750*400&markers=mid,,A:120.005060,30.292772&key=009dbec2a6e19d47163882e3f1a61541"
+                  alt="场地位置地图 - 杭州梦想小镇互联网村21幢"
+                  className="w-full h-auto object-cover cursor-pointer"
+                  style={{ aspectRatio: "750/400" }}
+                />
+            </a>
           </div>
           
           <div className="space-y-4">
