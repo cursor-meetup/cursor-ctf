@@ -70,117 +70,144 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          {isLoginMode ? '登录账户' : '注册新账户'}
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          {isLoginMode ? '还没有账户？' : '已有账户？'}
-          <button
-            onClick={() => {
-              setIsLoginMode(!isLoginMode);
-              setError('');
-              setUsername('');
-              setPassword('');
-              setConfirmPassword('');
-            }}
-            className="font-medium text-black hover:text-gray-800 ml-1"
-          >
-            {isLoginMode ? '立即注册' : '立即登录'}
-          </button>
-        </p>
-      </div>
+    <div className="min-h-screen relative flex items-center justify-center p-4">
+      {/* 背景图片层 */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/cursor.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      
+      {/* 毛玻璃效果覆盖层 */}
+      <div className="absolute inset-0 backdrop-blur-sm" />
+      
+      {/* 渐变遮罩层 */}
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-gray-100/50" /> */}
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      {/* 主容器 */}
+      <div className="relative w-full max-w-md z-10">
+        {/* 标题区域 */}
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="mb-6">
+            <h1 className="text-3xl font-bold text-gray-100 mb-2">
+              Cursor Meetup Hangzhou
+            </h1>
+            <p className="text-gray-200 text-sm">
+              {isLoginMode ? '登录您的账户' : '创建新账户'}
+            </p>
+          </div>
+        </div>
+
+        {/* 登录卡片 */}
+        <div className="bg-white/60 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 p-8 animate-slide-up">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* 用户名输入 */}
-            <div>
+            <div className="space-y-2">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 用户名
               </label>
-              <div className="mt-1">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                  placeholder="请输入用户名"
-                  disabled={loading}
-                />
-              </div>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                placeholder="输入用户名"
+                disabled={loading}
+              />
             </div>
 
             {/* 密码输入 */}
-            <div>
+            <div className="space-y-2">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 密码
               </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                  placeholder={isLoginMode ? "请输入密码" : "请输入至少6位密码"}
-                  disabled={loading}
-                />
-              </div>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                placeholder={isLoginMode ? "输入密码" : "输入至少6位密码"}
+                disabled={loading}
+              />
             </div>
 
             {/* 确认密码（仅注册时显示） */}
             {!isLoginMode && (
-              <div>
+              <div className="space-y-2 animate-slide-down">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                   确认密码
                 </label>
-                <div className="mt-1">
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                    placeholder="请再次输入密码"
-                    disabled={loading}
-                  />
-                </div>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                  placeholder="再次输入密码"
+                  disabled={loading}
+                />
               </div>
             )}
 
             {/* 错误提示 */}
             {error && (
-              <div className="rounded-md bg-red-50 p-4">
-                <div className="flex">
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                  </div>
-                </div>
+              <div className="p-4 bg-red-50/80 backdrop-blur-sm border border-red-200/50 rounded-xl animate-shake">
+                <p className="text-sm text-red-800">{error}</p>
               </div>
             )}
 
             {/* 提交按钮 */}
-            <div>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
-                  loading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {loading ? '处理中...' : isLoginMode ? '登录' : '注册'}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-black/90 text-white py-3 px-4 rounded-xl font-medium hover:bg-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] backdrop-blur-sm"
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  处理中...
+                </div>
+              ) : (
+                isLoginMode ? '登录' : '注册'
+              )}
+            </button>
           </form>
+
+          {/* 模式切换 */}
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              {isLoginMode ? '还没有账户？' : '已有账户？'}
+              <button
+                onClick={() => {
+                  setIsLoginMode(!isLoginMode);
+                  setError('');
+                  setUsername('');
+                  setPassword('');
+                  setConfirmPassword('');
+                }}
+                className="ml-1 text-black hover:text-gray-700 font-medium transition-colors duration-200"
+              >
+                {isLoginMode ? '立即注册' : '立即登录'}
+              </button>
+            </p>
+          </div>
+        </div>
+
+        {/* 底部装饰 */}
+        <div className="text-center mt-8 text-xs text-gray-100">
+          © 2025 Cursor Meetup Hangzhou
         </div>
       </div>
     </div>
