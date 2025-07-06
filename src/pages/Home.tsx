@@ -10,6 +10,7 @@ interface UnlockedFlag {
   flag_key: string;
   points: number;
   unlocked_at: string;
+  description: string;
 }
 
 const Home: React.FC = () => {
@@ -87,11 +88,15 @@ const Home: React.FC = () => {
       }
 
       setUnlockedFlags(
-        flagsData.map(item => ({
-          flag_key: item.flag_key,
-          points: item.points,
-          unlocked_at: item.unlocked_at,
-        }))
+        flagsData.map(item => {
+          const flagInfo = flagConfig.flags.find(flag => flag.key === item.flag_key);
+          return {
+            flag_key: item.flag_key,
+            points: item.points,
+            unlocked_at: item.unlocked_at,
+            description: flagInfo?.description || '未知标志',
+          };
+        })
       );
     } catch (error: any) {
       console.error('加载用户数据失败:', error);
@@ -254,14 +259,17 @@ const Home: React.FC = () => {
           {unlockedFlags.length > 0 && (
             <div className="mb-8">
               <h2 className="text-lg font-semibold mb-2">已解锁的 Flags ({unlockedFlags.length})</h2>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {unlockedFlags.map((flag, index) => (
-                  <div key={flag.flag_key} className="bg-white p-3 rounded-lg shadow-sm">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Flag #{index + 1}</span>
-                      <span className="text-green-600">+{flag.points} 分</span>
+                  <div key={flag.flag_key} className="bg-white p-4 rounded-lg shadow-sm border">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-medium text-gray-900">Flag #{index + 1}</span>
+                      <span className="text-green-600 font-semibold">+{flag.points} 分</span>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-700 mb-2">
+                      {flag.description}
+                    </div>
+                    <div className="text-xs text-gray-500">
                       {new Date(flag.unlocked_at).toLocaleString()}
                     </div>
                   </div>
