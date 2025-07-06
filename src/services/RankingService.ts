@@ -4,6 +4,7 @@ export interface RankingItem {
   username: string;
   total_score: number;
   rank: number;
+  has_claimed_prize?: boolean;
 }
 
 class RankingService {
@@ -47,7 +48,7 @@ class RankingService {
       // 获取用户数据
       const { data: userData, error: userError } = await supabase
         .from('users')
-        .select('username, total_score')
+        .select('username, total_score, has_claimed_prize')
         .eq('username', username)
         .single();
 

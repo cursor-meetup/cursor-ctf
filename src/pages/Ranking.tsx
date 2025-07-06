@@ -4,6 +4,7 @@ import { rankingService, RankingItem } from '../services/RankingService';
 import { authService } from '../services/AuthService';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import MeteorBackground from '../components/MeteorBackground';
+import { supabase } from '../config/supabase';
 
 const Ranking: React.FC = () => {
   const navigate = useNavigate();
@@ -11,7 +12,62 @@ const Ranking: React.FC = () => {
   const [userRanking, setUserRanking] = useState<RankingItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
+  const [showPrizeDialog, setShowPrizeDialog] = useState(false);
+  const [prizePassword, setPrizePassword] = useState('');
+  const [prizeLoading, setPrizeLoading] = useState(false);
+  const [prizeError, setPrizeError] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
   const currentUser = authService.getCurrentUser();
+
+  // 检查是否满足领奖条件
+  const checkPrizeEligibility = () => {
+    if (!userRanking) return false;
+    
+    // 检查当前时间是否在17:00之后
+    const currentHour = currentTime.getHours();
+    const isAfter17 = currentHour >= 17;
+    
+    // 检查排名是否在前20
+    const isTop20 = userRanking.rank <= 20;
+    
+    return isAfter17 && isTop20;
+  };
+
+  // 获取领奖按钮的状态和文本
+  const getPrizeButtonState = () => {
+    if (!userRanking) return { disabled: true, text: '获取排名中...', className: 'bg-gray-400 cursor-not-allowed' };
+    
+    // 已经领取过奖励
+    if (userRanking.has_claimed_prize) {
+      return { disabled: true, text: '已领取奖励', className: 'bg-gray-400 cursor-not-allowed' };
+    }
+    
+    const currentHour = currentTime.getHours();
+    const isAfter17 = currentHour >= 17;
+    const isTop20 = userRanking.rank <= 20;
+    
+    // 时间未到17:00
+    if (!isAfter17) {
+      return { disabled: true, text: `🕒 17:00后开放领取`, className: 'bg-gray-400 cursor-not-allowed' };
+    }
+    
+    // 排名不在前20
+    if (!isTop20) {
+      return { disabled: true, text: '仅限前20名领取', className: 'bg-gray-400 cursor-not-allowed' };
+    }
+    
+    // 满足条件，可以领取
+    return { disabled: false, text: '🎁 领取奖励', className: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg' };
+  };
+
+  // 定期更新时间，以便按钮状态能够实时更新
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // 每分钟更新一次
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     let rankingSubscription: RealtimeChannel;
@@ -83,6 +139,80 @@ const Ranking: React.FC = () => {
       }
     };
   }, [currentUser, navigate]);
+
+  const handleClaimPrize = async () => {
+    if (!currentUser) {
+      setPrizeError('请先登录');
+      return;
+    }
+
+    if (!prizePassword.trim()) {
+      setPrizeError('请输入密码');
+      return;
+    }
+
+    // 检查是否满足领奖条件
+    if (!checkPrizeEligibility()) {
+      setPrizeError('您还不满足领奖条件');
+      return;
+    }
+
+    setPrizeLoading(true);
+    setPrizeError('');
+
+    try {
+      // 验证密码
+      const correctPassword = '0000';
+      if (prizePassword !== correctPassword) {
+        setPrizeError('密码错误');
+        setPrizeLoading(false);
+        return;
+      }
+
+      // 检查用户是否已经领取过奖励
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('has_claimed_prize')
+        .eq('username', currentUser)
+        .single();
+
+      if (userError) {
+        throw userError;
+      }
+
+      if (userData.has_claimed_prize) {
+        setPrizeError('您已经领取过奖励了');
+        setPrizeLoading(false);
+        return;
+      }
+
+      // 更新用户奖励状态
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({ has_claimed_prize: true })
+        .eq('username', currentUser);
+
+      if (updateError) {
+        throw updateError;
+      }
+
+      // 刷新用户排名数据
+      if (currentUser) {
+        const updatedUserRanking = await rankingService.getUserRanking(currentUser);
+        setUserRanking(updatedUserRanking);
+      }
+
+      // 关闭弹窗并显示成功提示
+      setShowPrizeDialog(false);
+      setPrizePassword('');
+      alert('恭喜您！奖励领取成功！');
+    } catch (error: any) {
+      console.error('领取奖励失败:', error);
+      setPrizeError('领取失败，请重试');
+    } finally {
+      setPrizeLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -159,6 +289,23 @@ const Ranking: React.FC = () => {
           </div>
         )}
 
+        {/* 奖励领取按钮 */}
+        {currentUser && userRanking && (
+          <div className="mb-8">
+            <button
+              onClick={() => {
+                if (!getPrizeButtonState().disabled) {
+                  setShowPrizeDialog(true);
+                }
+              }}
+              disabled={getPrizeButtonState().disabled}
+              className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-colors duration-200 ${getPrizeButtonState().className}`}
+            >
+              {getPrizeButtonState().text}
+            </button>
+          </div>
+        )}
+
         {/* 排行榜列表 */}
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
@@ -201,6 +348,57 @@ const Ranking: React.FC = () => {
           </table>
         </div>
       </div>
+
+      {/* 奖励领取弹窗 */}
+      {showPrizeDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-4">🎁</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">领取奖励</h3>
+              <p className="text-gray-600">请输入密码以领取您的奖励</p>
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="password"
+                placeholder="请输入密码"
+                value={prizePassword}
+                onChange={(e) => setPrizePassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                disabled={prizeLoading}
+              />
+            </div>
+
+            {prizeError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-800">{prizeError}</p>
+              </div>
+            )}
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowPrizeDialog(false);
+                  setPrizePassword('');
+                  setPrizeError('');
+                }}
+                disabled={prizeLoading}
+                className="flex-1 py-3 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleClaimPrize}
+                disabled={prizeLoading}
+                className="flex-1 py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-colors duration-200 disabled:opacity-50"
+              >
+                {prizeLoading ? '领取中...' : '确认领取'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
