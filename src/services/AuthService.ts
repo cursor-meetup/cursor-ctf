@@ -91,32 +91,61 @@ class AuthService {
     }
   }
 
-  // 用户登录
+  // 用户登录或注册
   async login(username: string, password: string): Promise<User> {
     try {
-      const { data, error } = await supabase
+      // 首先尝试登录
+      const { data: existingUser, error: loginError } = await supabase
         .from('users')
         .select('*')
         .eq('username', username)
         .eq('password', this.hashPassword(password))
         .single();
 
-      if (error) {
-        this.handleAuthError(error);
-        throw new Error('用户名或密码错误');
+      if (existingUser) {
+        // 用户存在且密码正确，直接登录
+        localStorage.setItem('username', username);
+        localStorage.setItem('isAuthenticated', 'true');
+        return existingUser;
       }
 
-      if (!data) {
-        throw new Error('用户名或密码错误');
+      // 如果登录失败，检查是否是因为用户不存在
+      if (loginError && loginError.code === 'PGRST116') {
+        // 用户不存在，自动注册
+        const { data: newUser, error: registerError } = await supabase
+          .from('users')
+          .insert({
+            username,
+            password: this.hashPassword(password),
+            total_score: 0,
+            has_claimed_prize: false
+          })
+          .select()
+          .single();
+
+        if (registerError) {
+          // 可能是用户名冲突或其他错误
+          if (registerError.code === '23505') {
+            throw new Error('用户名已存在但密码错误');
+          }
+          this.handleAuthError(registerError);
+          throw new Error('注册失败，请重试');
+        }
+
+        if (!newUser) {
+          throw new Error('注册失败，请重试');
+        }
+
+        // 自动登录新注册的用户
+        localStorage.setItem('username', username);
+        localStorage.setItem('isAuthenticated', 'true');
+        return newUser;
       }
 
-      // 保存用户会话信息
-      localStorage.setItem('username', username);
-      localStorage.setItem('isAuthenticated', 'true');
-
-      return data;
+      // 用户存在但密码错误
+      throw new Error('用户名或密码错误');
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login/Register error:', error);
       if (error instanceof Error) {
         throw error;
       }

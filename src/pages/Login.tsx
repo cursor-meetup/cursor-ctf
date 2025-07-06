@@ -7,10 +7,8 @@ import MeteorBackground from '../components/MeteorBackground';
 const Login = () => {
   const navigate = useNavigate();
   const { isAuthenticated, login } = useAuth();
-  const [isLoginMode, setIsLoginMode] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -35,12 +33,8 @@ const Login = () => {
       setError('请输入密码');
       return false;
     }
-    if (password.length < 6) {
-      setError('密码长度至少为6位');
-      return false;
-    }
-    if (!isLoginMode && password !== confirmPassword) {
-      setError('两次输入的密码不一致');
+    if (password.length < 1) {
+      setError('密码长度至少为1位');
       return false;
     }
     return true;
@@ -57,18 +51,14 @@ const Login = () => {
     setLoading(true);
 
     try {
-      if (isLoginMode) {
-        await authService.login(username.trim(), password);
-      } else {
-        await authService.register(username.trim(), password);
-      }
+      await authService.login(username.trim(), password);
       
       // 调用上下文的 login 方法来更新全局状态
       login();
       navigate('/');
     } catch (err) {
       console.error('Auth error:', err);
-      setError(err instanceof Error ? err.message : '操作失败，请重试');
+      setError(err instanceof Error ? err.message : '登录失败，请重试');
     } finally {
       setLoading(false);
     }
@@ -88,7 +78,7 @@ const Login = () => {
               Cursor Meetup Hangzhou
             </h1>
             <p className="text-gray-700 text-sm">
-              {isLoginMode ? '登录您的账户' : '创建新账户'}
+              登录您的账户（新用户将自动注册）
             </p>
           </div>
         </div>
@@ -133,30 +123,10 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
-                placeholder={isLoginMode ? "输入密码" : "输入至少6位密码"}
+                placeholder="输入密码"
                 disabled={loading}
               />
             </div>
-
-            {/* 确认密码（仅注册时显示） */}
-            {!isLoginMode && (
-              <div className="space-y-2 animate-slide-down">
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                  确认密码
-                </label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
-                  placeholder="再次输入密码"
-                  disabled={loading}
-                />
-              </div>
-            )}
 
             {/* 错误提示 */}
             {error && (
@@ -177,27 +147,15 @@ const Login = () => {
                   处理中...
                 </div>
               ) : (
-                isLoginMode ? '登录' : '注册'
+                '登录 / 注册'
               )}
             </button>
           </form>
 
-          {/* 模式切换 */}
+          {/* 说明文字 */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              {isLoginMode ? '还没有账户？' : '已有账户？'}
-              <button
-                onClick={() => {
-                  setIsLoginMode(!isLoginMode);
-                  setError('');
-                  setUsername('');
-                  setPassword('');
-                  setConfirmPassword('');
-                }}
-                className="ml-1 text-black hover:text-gray-700 font-medium transition-colors duration-200"
-              >
-                {isLoginMode ? '立即注册' : '立即登录'}
-              </button>
+              首次使用将自动创建账户
             </p>
           </div>
         </div>
