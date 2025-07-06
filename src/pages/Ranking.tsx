@@ -1,121 +1,145 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
+import { rankingService, RankingItem } from '../services/RankingService';
+import { authService } from '../services/AuthService';
+import { RealtimeChannel } from '@supabase/supabase-js';
 
-interface UnlockedFlag {
-  key: string;
-  points: number;
-  timestamp: number;
-}
-
-const topRankers = [
-  { rank: 1, username: "cyber_master", score: 950, isMe: false },
-  { rank: 2, username: "hacker_pro", score: 880, isMe: false },
-  { rank: 3, username: "sec_expert", score: 750, isMe: false },
-  { rank: 4, username: "code_ninja", score: 640, isMe: false },
-];
-
-const Ranking = () => {
-  const [myScore, setMyScore] = useState(0);
-  const [myRank, setMyRank] = useState(0);
-  const [username, setUsername] = useState("未登录用户");
+const Ranking: React.FC = () => {
+  const [rankings, setRankings] = useState<RankingItem[]>([]);
+  const [userRanking, setUserRanking] = useState<RankingItem | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+  const currentUser = authService.getCurrentUser();
 
   useEffect(() => {
-    // 从 localStorage 读取用户名和已解锁的 flags
-    const storedUsername = localStorage.getItem("username");
-    const storedFlags = localStorage.getItem("unlockedFlags");
-    
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-    
-    if (storedFlags) {
-      const unlockedFlags: UnlockedFlag[] = JSON.parse(storedFlags);
-      // 计算总积分
-      const totalPoints = unlockedFlags.reduce((acc, flag) => acc + flag.points, 0);
-      setMyScore(totalPoints);
+    let rankingSubscription: RealtimeChannel;
 
-      // 计算排名
-      const allScores = [...topRankers.map(r => r.score), totalPoints].sort((a, b) => b - a);
-      const rank = allScores.indexOf(totalPoints) + 1;
-      setMyRank(rank);
-    }
-  }, []);
+    const fetchRankings = async () => {
+      try {
+        setLoading(true);
+        setError('');
 
-  // 动态生成完整的排行榜数据
-  const fullRankingList = [...topRankers];
-  if (myScore > 0 && !topRankers.some(r => r.score === myScore)) {
-    fullRankingList.push({
-      rank: myRank,
-      username: username,
-      score: myScore,
-      isMe: true
-    });
-    fullRankingList.sort((a, b) => b.score - a.score);
-    fullRankingList.forEach((player, index) => {
-      player.rank = index + 1;
-    });
+        // 获取排行榜数据
+        const rankingsData = await rankingService.getRankings();
+        setRankings(rankingsData);
+
+        // 如果用户已登录，获取用户排名
+        if (currentUser) {
+          const userRankingData = await rankingService.getUserRanking(currentUser);
+          setUserRanking(userRankingData);
+        }
+
+        // 订阅排行榜更新
+        rankingSubscription = rankingService.subscribeToRankingUpdates(async () => {
+          const updatedRankings = await rankingService.getRankings();
+          setRankings(updatedRankings);
+
+          if (currentUser) {
+            const updatedUserRanking = await rankingService.getUserRanking(currentUser);
+            setUserRanking(updatedUserRanking);
+          }
+        });
+      } catch (err) {
+        console.error('获取排行榜失败:', err);
+        setError('获取排行榜数据失败，请刷新页面重试');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRankings();
+
+    // 清理订阅
+    return () => {
+      if (rankingSubscription) {
+        rankingSubscription.unsubscribe();
+      }
+    };
+  }, [currentUser]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto"></div>
+          <p className="mt-4 text-gray-600">加载排行榜中...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-600 text-xl mb-4">⚠️</div>
+          <p className="text-gray-800">{error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-8">
-      <div className="max-w-md mx-auto">
-        {/* 页面标题 */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">排行榜</h1>
-          <p className="text-gray-600">查看你的排名和积分情况</p>
-        </div>
-        
-        {/* 我的排名卡片 */}
-        <div className="bg-black text-white rounded-2xl p-6 mb-6 text-center">
-          <div className="text-sm text-gray-300 mb-2">我的排名</div>
-          <div className="text-4xl font-bold mb-3">#{myRank || '-'}</div>
-          <div className="text-lg mb-1">{username}</div>
-          <div className="text-2xl font-semibold">{myScore} 分</div>
-        </div>
-        
-        {/* 排行榜列表 */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900">排行榜</h3>
-          </div>
-          
-          <div className="divide-y divide-gray-100">
-            {fullRankingList.map((player) => (
-              <div 
-                key={player.username} 
-                className={`px-6 py-4 flex items-center justify-between ${
-                  player.isMe ? "bg-gray-50" : ""
-                }`}
-              >
-                <div className="flex items-center space-x-4">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                    player.rank === 1 ? "bg-yellow-100 text-yellow-800" :
-                    player.rank === 2 ? "bg-gray-100 text-gray-800" :
-                    player.rank === 3 ? "bg-orange-100 text-orange-800" :
-                    "bg-gray-50 text-gray-600"
-                  }`}>
-                    {player.rank}
-                  </div>
-                  <div>
-                    <div className={`font-medium ${player.isMe ? "text-black" : "text-gray-900"}`}>
-                      {player.username}
-                      {player.isMe && <span className="ml-2 text-xs text-gray-500">(我)</span>}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-semibold text-gray-900">{player.score}</div>
-                  <div className="text-xs text-gray-500">分</div>
-                </div>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">排行榜</h1>
+
+        {/* 当前用户排名 */}
+        {currentUser && userRanking && (
+          <div className="bg-white shadow rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">你的排名</h2>
+            <div className="grid grid-cols-2 gap-4 text-center">
+              <div>
+                <p className="text-sm text-gray-500">当前排名</p>
+                <p className="text-2xl font-bold text-black">#{userRanking.rank}</p>
               </div>
-            ))}
+              <div>
+                <p className="text-sm text-gray-500">总分</p>
+                <p className="text-2xl font-bold text-black">{userRanking.total_score}</p>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        {/* 底部提示 */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
-            继续寻找 Flag，提升排名！
-          </p>
+        )}
+
+        {/* 排行榜列表 */}
+        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  排名
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  用户
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  分数
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {rankings.map((item) => (
+                <tr 
+                  key={item.username}
+                  className={currentUser === item.username ? 'bg-gray-50' : ''}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    #{item.rank}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {item.username}
+                    {currentUser === item.username && (
+                      <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        你
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {item.total_score}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
