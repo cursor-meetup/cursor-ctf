@@ -26,6 +26,16 @@ class AuthService {
     return CryptoJS.SHA256(password).toString();
   }
 
+  // 检查并处理授权错误
+  private handleAuthError(error: any): void {
+    if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
+      // 如果是授权错误，自动登出
+      this.logout();
+      // 刷新页面以触发路由重定向
+      window.location.href = '/login';
+    }
+  }
+
   // 用户注册
   async register(username: string, password: string): Promise<User> {
     try {
@@ -41,6 +51,7 @@ class AuthService {
       }
 
       if (checkError && checkError.code !== 'PGRST116') { // PGRST116 表示没有找到记录
+        this.handleAuthError(checkError);
         throw checkError;
       }
 
@@ -58,6 +69,7 @@ class AuthService {
 
       if (error) {
         console.error('Registration error:', error);
+        this.handleAuthError(error);
         throw new Error('注册失败，请重试');
       }
 
@@ -89,7 +101,12 @@ class AuthService {
         .eq('password', this.hashPassword(password))
         .single();
 
-      if (error || !data) {
+      if (error) {
+        this.handleAuthError(error);
+        throw new Error('用户名或密码错误');
+      }
+
+      if (!data) {
         throw new Error('用户名或密码错误');
       }
 
@@ -123,6 +140,33 @@ class AuthService {
     return localStorage.getItem('username');
   }
 
+  // 验证用户会话有效性
+  async validateSession(): Promise<boolean> {
+    const username = this.getCurrentUser();
+    if (!username) {
+      return false;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('username')
+        .eq('username', username)
+        .single();
+
+      if (error) {
+        this.handleAuthError(error);
+        return false;
+      }
+
+      return !!data;
+    } catch (error) {
+      console.error('Session validation error:', error);
+      this.logout();
+      return false;
+    }
+  }
+
   // 更新用户密码
   async updatePassword(username: string, oldPassword: string, newPassword: string): Promise<void> {
     try {
@@ -134,7 +178,12 @@ class AuthService {
         .eq('password', this.hashPassword(oldPassword))
         .single();
 
-      if (checkError || !user) {
+      if (checkError) {
+        this.handleAuthError(checkError);
+        throw new Error('旧密码错误');
+      }
+
+      if (!user) {
         throw new Error('旧密码错误');
       }
 
@@ -148,6 +197,7 @@ class AuthService {
         .eq('username', username);
 
       if (updateError) {
+        this.handleAuthError(updateError);
         throw updateError;
       }
     } catch (error) {

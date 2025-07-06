@@ -19,16 +19,35 @@ const Home: React.FC = () => {
   const [totalPoints, setTotalPoints] = useState(0);
   const [unlockedFlags, setUnlockedFlags] = useState<UnlockedFlag[]>([]);
   const [loading, setLoading] = useState(false);
+  const [sessionLoading, setSessionLoading] = useState(true);
   const username = authService.getCurrentUser();
 
   useEffect(() => {
+    const validateAndLoadData = async () => {
+      try {
+        // 验证会话有效性
+        const isValidSession = await authService.validateSession();
+        if (!isValidSession) {
+          navigate('/login');
+          return;
+        }
+
+        // 加载用户数据
+        await loadUserData();
+      } catch (error) {
+        console.error('Session validation failed:', error);
+        navigate('/login');
+      } finally {
+        setSessionLoading(false);
+      }
+    };
+
     if (!username) {
       navigate('/login');
       return;
     }
 
-    // 加载用户数据
-    loadUserData();
+    validateAndLoadData();
   }, [username, navigate]);
 
   const loadUserData = async () => {
@@ -40,7 +59,15 @@ const Home: React.FC = () => {
         .eq('username', username)
         .single();
 
-      if (userError) throw userError;
+      if (userError) {
+        if (userError.code === 'PGRST116') {
+          // 用户不存在，可能是会话过期
+          authService.logout();
+          navigate('/login');
+          return;
+        }
+        throw userError;
+      }
       setTotalPoints(userData.total_score);
 
       // 获取已解锁的 flags
@@ -49,7 +76,9 @@ const Home: React.FC = () => {
         .select('flag_key, points, created_at')
         .eq('username', username);
 
-      if (flagsError) throw flagsError;
+      if (flagsError) {
+        throw flagsError;
+      }
 
       setUnlockedFlags(
         flagsData.map(item => ({
@@ -58,8 +87,13 @@ const Home: React.FC = () => {
           unlocked_at: item.created_at,
         }))
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error('加载用户数据失败:', error);
+      // 如果是授权相关错误，跳转到登录页面
+      if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
+        authService.logout();
+        navigate('/login');
+      }
     }
   };
 
@@ -106,8 +140,14 @@ const Home: React.FC = () => {
       } else {
         setResult("Flag 不正确，请重试");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('提交 flag 失败:', error);
+      // 如果是授权相关错误，跳转到登录页面
+      if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
+        authService.logout();
+        navigate('/login');
+        return;
+      }
       setResult("提交失败，请重试");
     } finally {
       setLoading(false);
@@ -120,6 +160,18 @@ const Home: React.FC = () => {
     authService.logout();
     navigate('/login');
   };
+
+  // 如果正在验证会话，显示加载状态
+  if (sessionLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto"></div>
+          <p className="mt-4 text-gray-600">验证登录状态...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 relative">

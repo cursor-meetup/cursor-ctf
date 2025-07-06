@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { rankingService, RankingItem } from '../services/RankingService';
 import { authService } from '../services/AuthService';
 import { RealtimeChannel } from '@supabase/supabase-js';
 
 const Ranking: React.FC = () => {
+  const navigate = useNavigate();
   const [rankings, setRankings] = useState<RankingItem[]>([]);
   const [userRanking, setUserRanking] = useState<RankingItem | null>(null);
   const [loading, setLoading] = useState(true);
@@ -13,8 +15,20 @@ const Ranking: React.FC = () => {
   useEffect(() => {
     let rankingSubscription: RealtimeChannel;
 
-    const fetchRankings = async () => {
+    const validateAndFetchRankings = async () => {
       try {
+        // 验证会话有效性
+        if (!currentUser) {
+          navigate('/login');
+          return;
+        }
+
+        const isValidSession = await authService.validateSession();
+        if (!isValidSession) {
+          navigate('/login');
+          return;
+        }
+
         setLoading(true);
         setError('');
 
@@ -30,23 +44,38 @@ const Ranking: React.FC = () => {
 
         // 订阅排行榜更新
         rankingSubscription = rankingService.subscribeToRankingUpdates(async () => {
-          const updatedRankings = await rankingService.getRankings();
-          setRankings(updatedRankings);
+          try {
+            const updatedRankings = await rankingService.getRankings();
+            setRankings(updatedRankings);
 
-          if (currentUser) {
-            const updatedUserRanking = await rankingService.getUserRanking(currentUser);
-            setUserRanking(updatedUserRanking);
+            if (currentUser) {
+              const updatedUserRanking = await rankingService.getUserRanking(currentUser);
+              setUserRanking(updatedUserRanking);
+            }
+          } catch (err: any) {
+            console.error('更新排行榜失败:', err);
+            // 如果是授权相关错误，跳转到登录页面
+            if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
+              authService.logout();
+              navigate('/login');
+            }
           }
         });
-      } catch (err) {
+      } catch (err: any) {
         console.error('获取排行榜失败:', err);
+        // 如果是授权相关错误，跳转到登录页面
+        if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
+          authService.logout();
+          navigate('/login');
+          return;
+        }
         setError('获取排行榜数据失败，请刷新页面重试');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRankings();
+    validateAndFetchRankings();
 
     // 清理订阅
     return () => {
@@ -54,7 +83,7 @@ const Ranking: React.FC = () => {
         rankingSubscription.unsubscribe();
       }
     };
-  }, [currentUser]);
+  }, [currentUser, navigate]);
 
   if (loading) {
     return (
@@ -86,7 +115,6 @@ const Ranking: React.FC = () => {
         {/* 当前用户排名 */}
         {currentUser && userRanking && (
           <div className="bg-black shadow-lg rounded-lg p-6 mb-8">
-            
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
                 <p className="text-sm text-gray-400">当前排名</p>
