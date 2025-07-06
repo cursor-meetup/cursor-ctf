@@ -7,43 +7,51 @@ import Gallery from "./pages/Gallery";
 import Ranking from "./pages/Ranking";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BottomNav from "./components/BottomNav";
-import { authService } from "./services/AuthService";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
-const App = () => {
-  const isAuthenticated = authService.isAuthenticated();
+const AppContent = () => {
+  const { isAuthenticated } = useAuth();
 
   return (
-    <Router>
-      <div className="pb-16">
-        <Routes>
-          <Route path="/login" element={
-            isAuthenticated ? <Navigate to="/" replace /> : <Login />
-          } />
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } />
-          <Route path="/venue" element={
-            <ProtectedRoute>
-              <Venue />
-            </ProtectedRoute>
-          } />
-          <Route path="/gallery" element={
-            <ProtectedRoute>
-              <Gallery />
-            </ProtectedRoute>
-          } />
-          <Route path="/ranking" element={
-            <ProtectedRoute>
-              <Ranking />
-            </ProtectedRoute>
-          } />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        {isAuthenticated && <BottomNav />}
-      </div>
-    </Router>
+    <div className="pb-16">
+      <Routes>
+        <Route path="/login" element={
+          isAuthenticated ? <Navigate to="/" replace /> : <Login />
+        } />
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/venue" element={
+          <ProtectedRoute>
+            <Venue />
+          </ProtectedRoute>
+        } />
+        <Route path="/gallery" element={
+          <ProtectedRoute>
+            <Gallery />
+          </ProtectedRoute>
+        } />
+        <Route path="/ranking" element={
+          <ProtectedRoute>
+            <Ranking />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      {isAuthenticated && <BottomNav />}
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 };
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/AuthService';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
+  const { isAuthenticated, login } = useAuth();
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,10 +15,10 @@ const Login = () => {
 
   // 检查是否已登录
   useEffect(() => {
-    if (authService.isAuthenticated()) {
+    if (isAuthenticated) {
       navigate('/');
     }
-  }, [navigate]);
+  }, [isAuthenticated, navigate]);
 
   // 输入验证
   const validateInput = () => {
@@ -32,7 +34,7 @@ const Login = () => {
       setError('密码长度至少为6位');
       return false;
     }
-    if (!isLogin && password !== confirmPassword) {
+    if (!isLoginMode && password !== confirmPassword) {
       setError('两次输入的密码不一致');
       return false;
     }
@@ -50,11 +52,14 @@ const Login = () => {
     setLoading(true);
 
     try {
-      if (isLogin) {
+      if (isLoginMode) {
         await authService.login(username.trim(), password);
       } else {
         await authService.register(username.trim(), password);
       }
+      
+      // 调用上下文的 login 方法来更新全局状态
+      login();
       navigate('/');
     } catch (err) {
       console.error('Auth error:', err);
@@ -68,13 +73,13 @@ const Login = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          {isLogin ? '登录账户' : '注册新账户'}
+          {isLoginMode ? '登录账户' : '注册新账户'}
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          {isLogin ? '还没有账户？' : '已有账户？'}
+          {isLoginMode ? '还没有账户？' : '已有账户？'}
           <button
             onClick={() => {
-              setIsLogin(!isLogin);
+              setIsLoginMode(!isLoginMode);
               setError('');
               setUsername('');
               setPassword('');
@@ -82,7 +87,7 @@ const Login = () => {
             }}
             className="font-medium text-black hover:text-gray-800 ml-1"
           >
-            {isLogin ? '立即注册' : '立即登录'}
+            {isLoginMode ? '立即注册' : '立即登录'}
           </button>
         </p>
       </div>
@@ -124,14 +129,14 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                  placeholder={isLogin ? "请输入密码" : "请输入至少6位密码"}
+                  placeholder={isLoginMode ? "请输入密码" : "请输入至少6位密码"}
                   disabled={loading}
                 />
               </div>
             </div>
 
             {/* 确认密码（仅注册时显示） */}
-            {!isLogin && (
+            {!isLoginMode && (
               <div>
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                   确认密码
@@ -172,7 +177,7 @@ const Login = () => {
                   loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
-                {loading ? '处理中...' : isLogin ? '登录' : '注册'}
+                {loading ? '处理中...' : isLoginMode ? '登录' : '注册'}
               </button>
             </div>
           </form>

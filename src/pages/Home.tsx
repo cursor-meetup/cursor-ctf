@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/AuthService';
+import { useAuth } from '../contexts/AuthContext';
 import InputDialog from '../components/InputDialog';
 import flagConfig from '../config/flag.json';
 import { supabase } from '../config/supabase';
@@ -13,6 +14,7 @@ interface UnlockedFlag {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
   const [input, setInput] = useState("");
   const [showDialog, setShowDialog] = useState(false);
   const [result, setResult] = useState("");
@@ -20,7 +22,6 @@ const Home: React.FC = () => {
   const [unlockedFlags, setUnlockedFlags] = useState<UnlockedFlag[]>([]);
   const [loading, setLoading] = useState(false);
   const [sessionLoading, setSessionLoading] = useState(true);
-  const username = authService.getCurrentUser();
 
   useEffect(() => {
     const validateAndLoadData = async () => {
@@ -28,6 +29,7 @@ const Home: React.FC = () => {
         // 验证会话有效性
         const isValidSession = await authService.validateSession();
         if (!isValidSession) {
+          logout();
           navigate('/login');
           return;
         }
@@ -36,19 +38,21 @@ const Home: React.FC = () => {
         await loadUserData();
       } catch (error) {
         console.error('Session validation failed:', error);
+        logout();
         navigate('/login');
       } finally {
         setSessionLoading(false);
       }
     };
 
-    if (!username) {
+    if (!currentUser) {
+      logout();
       navigate('/login');
       return;
     }
 
     validateAndLoadData();
-  }, [username, navigate]);
+  }, [currentUser, logout, navigate]);
 
   const loadUserData = async () => {
     try {
@@ -56,13 +60,13 @@ const Home: React.FC = () => {
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('total_score')
-        .eq('username', username)
+        .eq('username', currentUser)
         .single();
 
       if (userError) {
         if (userError.code === 'PGRST116') {
           // 用户不存在，可能是会话过期
-          authService.logout();
+          logout();
           navigate('/login');
           return;
         }
@@ -74,7 +78,7 @@ const Home: React.FC = () => {
       const { data: flagsData, error: flagsError } = await supabase
         .from('user_flags')
         .select('flag_key, points, created_at')
-        .eq('username', username);
+        .eq('username', currentUser);
 
       if (flagsError) {
         throw flagsError;
@@ -91,7 +95,7 @@ const Home: React.FC = () => {
       console.error('加载用户数据失败:', error);
       // 如果是授权相关错误，跳转到登录页面
       if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
-        authService.logout();
+        logout();
         navigate('/login');
       }
     }
@@ -110,7 +114,7 @@ const Home: React.FC = () => {
         const { data: existingFlag, error: checkError } = await supabase
           .from('user_flags')
           .select('flag_key')
-          .eq('username', username)
+          .eq('username', currentUser)
           .eq('flag_key', foundFlag.key)
           .single();
 
@@ -126,7 +130,7 @@ const Home: React.FC = () => {
 
         // 解锁新的 flag
         const { error: updateError } = await supabase.rpc('unlock_flag', {
-          p_username: username,
+          p_username: currentUser,
           p_flag_key: foundFlag.key,
           p_points: foundFlag.points
         });
@@ -144,7 +148,7 @@ const Home: React.FC = () => {
       console.error('提交 flag 失败:', error);
       // 如果是授权相关错误，跳转到登录页面
       if (error?.code === 'PGRST301' || error?.message?.includes('JWT')) {
-        authService.logout();
+        logout();
         navigate('/login');
         return;
       }
@@ -157,7 +161,7 @@ const Home: React.FC = () => {
   };
 
   const handleLogout = () => {
-    authService.logout();
+    logout();
     navigate('/login');
   };
 
