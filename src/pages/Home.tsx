@@ -273,7 +273,9 @@ const Home: React.FC = () => {
           <div className="mt-6">
             <button
               onClick={() => setShowActivityDialog(true)}
-              className="w-full py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors duration-200 text-lg border-2 border-gray-200"
+              className={`w-full py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors duration-200 text-lg border-2 border-gray-200 ${
+                unlockedFlags.length === 0 ? 'animate-pulse-scale' : ''
+              }`}
             >
               活动说明
             </button>
