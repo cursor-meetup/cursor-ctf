@@ -85,16 +85,16 @@ const Ranking: React.FC = () => {
 
         {/* 当前用户排名 */}
         {currentUser && userRanking && (
-          <div className="bg-white shadow rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">你的排名</h2>
+          <div className="bg-black shadow-lg rounded-lg p-6 mb-8">
+            
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <p className="text-sm text-gray-500">当前排名</p>
-                <p className="text-2xl font-bold text-black">#{userRanking.rank}</p>
+                <p className="text-sm text-gray-400">当前排名</p>
+                <p className="text-2xl font-bold text-white">#{userRanking.rank}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">总分</p>
-                <p className="text-2xl font-bold text-black">{userRanking.total_score}</p>
+                <p className="text-sm text-gray-400">总分</p>
+                <p className="text-2xl font-bold text-white">{userRanking.total_score}</p>
               </div>
             </div>
           </div>

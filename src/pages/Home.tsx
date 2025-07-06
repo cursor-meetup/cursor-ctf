@@ -98,7 +98,7 @@ const Home = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Cursor Meetup Hangzhou</h1>
           <p className="text-gray-600">请输入正确的口令以继续</p>
-          <p className="text-lg font-semibold text-black mt-4">当前积分: {totalPoints}</p>
+          {totalPoints > 0 && <p className="text-lg font-semibold text-black mt-4">当前积分: {totalPoints}</p>}
         </div>
                 
         {/* 表单 */}
@@ -129,7 +129,9 @@ const Home = () => {
 
         {/* 已解锁的 Flags */}
         <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-2">已解锁的 Flags ({unlockedFlags.length})</h2>
+          {unlockedFlags.length > 0 && (
+            <h2 className="text-lg font-semibold mb-2">已解锁的 Flags ({unlockedFlags.length})</h2>
+          )}
           <div className="space-y-2">
             {unlockedFlags.map((flag, index) => (
               <div key={flag.flag_key} className="bg-white p-3 rounded-lg shadow-sm">
