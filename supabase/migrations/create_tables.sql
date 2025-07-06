@@ -56,6 +56,39 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- 创建奖励领取函数
+CREATE OR REPLACE FUNCTION claim_prize(target_username TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+    user_exists BOOLEAN;
+    already_claimed BOOLEAN;
+BEGIN
+    -- 检查用户是否存在
+    SELECT EXISTS(SELECT 1 FROM users WHERE username = target_username) INTO user_exists;
+    
+    IF NOT user_exists THEN
+        RETURN FALSE;
+    END IF;
+    
+    -- 检查是否已经领取过奖励
+    SELECT has_claimed_prize INTO already_claimed 
+    FROM users 
+    WHERE username = target_username;
+    
+    IF already_claimed THEN
+        RETURN FALSE;
+    END IF;
+    
+    -- 更新奖励状态
+    UPDATE users 
+    SET has_claimed_prize = TRUE, 
+        updated_at = NOW()
+    WHERE username = target_username;
+    
+    RETURN TRUE;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- 创建 RLS 策略
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_flags ENABLE ROW LEVEL SECURITY;

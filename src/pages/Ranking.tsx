@@ -182,20 +182,41 @@ const Ranking: React.FC = () => {
         return;
       }
 
-      // 更新用户奖励状态
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({ has_claimed_prize: true })
-        .eq('username', currentUser);
+      // 使用数据库函数更新用户奖励状态
+      const { data: claimResult, error: claimError } = await supabase
+        .rpc('claim_prize', { target_username: currentUser });
 
-      if (updateError) {
-        throw updateError;
+      if (claimError) {
+        throw claimError;
       }
 
-      // 刷新用户排名数据
+      // 检查领取结果
+      if (!claimResult) {
+        setPrizeError('领取失败，可能已经领取过或不满足条件');
+        setPrizeLoading(false);
+        return;
+      }
+
+      // 立即更新本地状态，确保UI立即反映变化
+      setUserRanking(prevRanking => {
+        if (prevRanking) {
+          return {
+            ...prevRanking,
+            has_claimed_prize: true
+          };
+        }
+        return prevRanking;
+      });
+
+      // 刷新用户排名数据（作为备用确保数据同步）
       if (currentUser) {
-        const updatedUserRanking = await rankingService.getUserRanking(currentUser);
-        setUserRanking(updatedUserRanking);
+        try {
+          const updatedUserRanking = await rankingService.getUserRanking(currentUser);
+          setUserRanking(updatedUserRanking);
+        } catch (err) {
+          console.error('刷新用户排名数据失败:', err);
+          // 如果刷新失败，至少本地状态已经更新了
+        }
       }
 
       // 关闭弹窗并显示成功提示
