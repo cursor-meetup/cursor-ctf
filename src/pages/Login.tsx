@@ -71,34 +71,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4">
-      {/* 背景图片层 */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="animate-scroll-bg" style={{ height: '200vh' }}>
-          {/* 第一个背景图片 */}
-          <div 
-            className="absolute inset-x-0 top-0"
-            style={{
-              backgroundImage: 'url(/cursor.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              height: '100vh'
-            }}
-          />
-          {/* 第二个背景图片 */}
-          <div 
-            className="absolute inset-x-0"
-            style={{
-              backgroundImage: 'url(/cursor.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              height: '100vh',
-              top: '100vh'
-            }}
-          />
-        </div>
-      </div>
+     
       
       {/* 毛玻璃效果覆盖层 */}
       <div className="absolute inset-0 backdrop-blur-sm" />
@@ -111,10 +84,10 @@ const Login = () => {
         {/* 标题区域 */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="mb-6">
-            {/* <h1 className="text-3xl font-bold text-gray-100 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Cursor Meetup Hangzhou
-            </h1> */}
-            <p className="text-gray-200 text-sm">
+            </h1>
+            <p className="text-gray-600 text-sm">
               {isLoginMode ? '登录您的账户' : '创建新账户'}
             </p>
           </div>
