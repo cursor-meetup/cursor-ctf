@@ -70,35 +70,36 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4">
-     
-      
-      {/* 毛玻璃效果覆盖层 */}
-      <div className="absolute inset-0 backdrop-blur-sm" />
-      
-      {/* 渐变遮罩层 */}
-      {/* <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-gray-100/50" /> */}
+    <div className="min-h-screen relative flex items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200">
+      {/* 流星雨效果 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="meteor meteor-1"></div>
+        <div className="meteor meteor-2"></div>
+        <div className="meteor meteor-3"></div>
+        <div className="meteor meteor-4"></div>
+        <div className="meteor meteor-5"></div>
+      </div>
 
       {/* 主容器 */}
       <div className="relative w-full max-w-md z-10">
         {/* 标题区域 */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2 animate-float-title">
               Cursor Meetup Hangzhou
             </h1>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-700 text-sm">
               {isLoginMode ? '登录您的账户' : '创建新账户'}
             </p>
           </div>
         </div>
 
         {/* 登录卡片 */}
-        <div className="bg-white/60 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 p-8 animate-slide-up">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 animate-slide-up">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* 用户名输入 */}
             <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 用户名
               </label>
               <input
@@ -108,7 +109,7 @@ const Login = () => {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
                 placeholder="输入用户名"
                 disabled={loading}
               />
@@ -116,7 +117,7 @@ const Login = () => {
 
             {/* 密码输入 */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 密码
               </label>
               <input
@@ -126,7 +127,7 @@ const Login = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
                 placeholder={isLoginMode ? "输入密码" : "输入至少6位密码"}
                 disabled={loading}
               />
@@ -145,7 +146,7 @@ const Login = () => {
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300/50 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white/70 backdrop-blur-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white"
                   placeholder="再次输入密码"
                   disabled={loading}
                 />
@@ -154,7 +155,7 @@ const Login = () => {
 
             {/* 错误提示 */}
             {error && (
-              <div className="p-4 bg-red-50/80 backdrop-blur-sm border border-red-200/50 rounded-xl animate-shake">
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl animate-shake">
                 <p className="text-sm text-red-800">{error}</p>
               </div>
             )}
@@ -163,7 +164,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black/90 text-white py-3 px-4 rounded-xl font-medium hover:bg-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] backdrop-blur-sm"
+              className="w-full bg-black text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
             >
               {loading ? (
                 <div className="flex items-center justify-center">
@@ -197,7 +198,7 @@ const Login = () => {
         </div>
 
         {/* 底部装饰 */}
-        <div className="text-center mt-8 text-xs text-gray-100">
+        <div className="text-center mt-8 text-xs text-gray-600">
           © 2025 Cursor Meetup Hangzhou
         </div>
       </div>

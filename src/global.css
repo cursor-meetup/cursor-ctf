@@ -95,6 +95,67 @@ select:focus {
   animation: scrollBackground 15s linear infinite;
 }
 
+/* 标题浮动动画 */
+.animate-float-title {
+  animation: floatTitle 3s ease-in-out infinite;
+}
+
+/* 流星雨动画 */
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  transform: rotate(-135deg);
+  transform-origin: 0 0;
+}
+
+.meteor-1 {
+  animation: meteor1 8s linear infinite;
+  top: -100px;
+  right: 10%;
+}
+
+.meteor-2 {
+  animation: meteor2 10s linear infinite;
+  top: -100px;
+  right: 30%;
+  animation-delay: 2s;
+}
+
+.meteor-3 {
+  animation: meteor3 12s linear infinite;
+  top: -100px;
+  right: 50%;
+  animation-delay: 4s;
+}
+
+.meteor-4 {
+  animation: meteor4 9s linear infinite;
+  top: -100px;
+  right: 70%;
+  animation-delay: 6s;
+}
+
+.meteor-5 {
+  animation: meteor5 11s linear infinite;
+  top: -100px;
+  right: 90%;
+  animation-delay: 1s;
+}
+
 @keyframes fadeInLogin {
   from {
     opacity: 0;
@@ -148,6 +209,100 @@ select:focus {
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes meteor1 {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-200px);
+    opacity: 0;
+  }
+}
+
+@keyframes meteor2 {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-150px);
+    opacity: 0;
+  }
+}
+
+@keyframes meteor3 {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-180px);
+    opacity: 0;
+  }
+}
+
+@keyframes meteor4 {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-120px);
+    opacity: 0;
+  }
+}
+
+@keyframes meteor5 {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-160px);
+    opacity: 0;
   }
 }
 
