@@ -134,14 +134,8 @@ const Ranking: React.FC = () => {
 
         {/* 未登录提示 */}
         {!currentUser && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-center">
-            <p className="text-blue-800 mb-4">登录后查看您的排名和积分</p>
-            <button
-              onClick={() => navigate('/login')}
-              className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
-            >
-              立即登录
-            </button>
+          <div className="bg-black border border-gray-200 rounded-lg p-6 mb-8 text-center">
+            <p className="text-2xl text-gray-100 mb-4">登录后查看您的排名和积分</p>
           </div>
         )}
 
