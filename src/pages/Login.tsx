@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/AuthService';
 import { useAuth } from '../contexts/AuthContext';
+import MeteorBackground from '../components/MeteorBackground';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -76,13 +77,7 @@ const Login = () => {
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200">
       {/* 流星雨效果 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="meteor meteor-1"></div>
-        <div className="meteor meteor-2"></div>
-        <div className="meteor meteor-3"></div>
-        <div className="meteor meteor-4"></div>
-        <div className="meteor meteor-5"></div>
-      </div>
+      <MeteorBackground />
 
       {/* 主容器 */}
       <div className="relative w-full max-w-md z-10">

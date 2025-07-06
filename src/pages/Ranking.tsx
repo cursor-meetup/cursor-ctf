@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { rankingService, RankingItem } from '../services/RankingService';
 import { authService } from '../services/AuthService';
 import { RealtimeChannel } from '@supabase/supabase-js';
+import MeteorBackground from '../components/MeteorBackground';
 
 const Ranking: React.FC = () => {
   const navigate = useNavigate();
@@ -107,6 +108,9 @@ const Ranking: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 relative">
+      {/* 流星雨背景 */}
+      <MeteorBackground />
+      
       {/* 登录/退出按钮 */}
       <div className="absolute top-4 right-4">
         {currentUser ? (

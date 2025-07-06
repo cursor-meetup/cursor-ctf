@@ -1,4 +1,5 @@
 import React from "react";
+import MeteorBackground from "../components/MeteorBackground";
 
 const images = [
   { placeholder: "比赛现场", description: "激烈的比赛氛围" },
@@ -11,8 +12,11 @@ const images = [
 
 const Gallery = () => {
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-8">
-      <div className="max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-50 px-6 py-8 relative">
+      {/* 流星雨背景 */}
+      <MeteorBackground />
+      
+      <div className="max-w-md mx-auto relative">
         {/* 页面标题 */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">精彩展示</h1>

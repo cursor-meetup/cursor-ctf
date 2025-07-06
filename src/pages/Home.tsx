@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/AuthService';
 import { useAuth } from '../contexts/AuthContext';
 import InputDialog from '../components/InputDialog';
+import MeteorBackground from '../components/MeteorBackground';
 import flagConfig from '../config/flag.json';
 import { supabase } from '../config/supabase';
 
@@ -196,6 +197,9 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
+      {/* 流星雨背景 */}
+      <MeteorBackground />
+      
       {/* 登录/退出按钮 */}
       <div className="absolute top-4 right-4">
         {currentUser ? (
