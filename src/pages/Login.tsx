@@ -9,6 +9,7 @@ const Login = () => {
   const handleSubmit = (username: string, password: string, isLogin: boolean) => {
     // TODO: 登录/注册逻辑
     localStorage.setItem("isLogin", "true"); // 设置登录态
+    localStorage.setItem("username", username); // 保存用户名
     navigate("/");
   };
 

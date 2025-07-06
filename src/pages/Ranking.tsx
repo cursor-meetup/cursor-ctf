@@ -1,20 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const mockData = {
-  username: "ctf_user",
-  rank: 5,
-  score: 320,
-};
+interface UnlockedFlag {
+  key: string;
+  points: number;
+  timestamp: number;
+}
 
 const topRankers = [
   { rank: 1, username: "cyber_master", score: 950, isMe: false },
   { rank: 2, username: "hacker_pro", score: 880, isMe: false },
   { rank: 3, username: "sec_expert", score: 750, isMe: false },
   { rank: 4, username: "code_ninja", score: 640, isMe: false },
-  { rank: 5, username: "ctf_user", score: 320, isMe: true },
 ];
 
 const Ranking = () => {
+  const [myScore, setMyScore] = useState(0);
+  const [myRank, setMyRank] = useState(0);
+  const [username, setUsername] = useState("未登录用户");
+
+  useEffect(() => {
+    // 从 localStorage 读取用户名和已解锁的 flags
+    const storedUsername = localStorage.getItem("username");
+    const storedFlags = localStorage.getItem("unlockedFlags");
+    
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+    
+    if (storedFlags) {
+      const unlockedFlags: UnlockedFlag[] = JSON.parse(storedFlags);
+      // 计算总积分
+      const totalPoints = unlockedFlags.reduce((acc, flag) => acc + flag.points, 0);
+      setMyScore(totalPoints);
+
+      // 计算排名
+      const allScores = [...topRankers.map(r => r.score), totalPoints].sort((a, b) => b - a);
+      const rank = allScores.indexOf(totalPoints) + 1;
+      setMyRank(rank);
+    }
+  }, []);
+
+  // 动态生成完整的排行榜数据
+  const fullRankingList = [...topRankers];
+  if (myScore > 0 && !topRankers.some(r => r.score === myScore)) {
+    fullRankingList.push({
+      rank: myRank,
+      username: username,
+      score: myScore,
+      isMe: true
+    });
+    fullRankingList.sort((a, b) => b.score - a.score);
+    fullRankingList.forEach((player, index) => {
+      player.rank = index + 1;
+    });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <div className="max-w-md mx-auto">
@@ -27,21 +67,21 @@ const Ranking = () => {
         {/* 我的排名卡片 */}
         <div className="bg-black text-white rounded-2xl p-6 mb-6 text-center">
           <div className="text-sm text-gray-300 mb-2">我的排名</div>
-          <div className="text-4xl font-bold mb-3">#{mockData.rank}</div>
-          <div className="text-lg mb-1">{mockData.username}</div>
-          <div className="text-2xl font-semibold">{mockData.score} 分</div>
+          <div className="text-4xl font-bold mb-3">#{myRank || '-'}</div>
+          <div className="text-lg mb-1">{username}</div>
+          <div className="text-2xl font-semibold">{myScore} 分</div>
         </div>
         
         {/* 排行榜列表 */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900">前5名选手</h3>
+            <h3 className="text-lg font-semibold text-gray-900">排行榜</h3>
           </div>
           
           <div className="divide-y divide-gray-100">
-            {topRankers.map((player) => (
+            {fullRankingList.map((player) => (
               <div 
-                key={player.rank} 
+                key={player.username} 
                 className={`px-6 py-4 flex items-center justify-between ${
                   player.isMe ? "bg-gray-50" : ""
                 }`}
@@ -74,7 +114,7 @@ const Ranking = () => {
         {/* 底部提示 */}
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-500">
-            继续努力，冲击更高排名！
+            继续寻找 Flag，提升排名！
           </p>
         </div>
       </div>
