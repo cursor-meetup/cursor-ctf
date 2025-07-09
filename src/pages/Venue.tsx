@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import MeteorBackground from "../components/MeteorBackground";
 
 const Venue = () => {
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleShowDetails = () => {
+    setShowDetails(!showDetails);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 relative">
       {/* 流星雨背景 */}
@@ -55,13 +61,43 @@ const Venue = () => {
         
         {/* 功能按钮 */}
         <div className="space-y-3">
-          <button className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200">
-            查看详细信息
+          <button 
+            onClick={handleShowDetails}
+            className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200"
+          >
+            {showDetails ? '收起路线指引' : '查看路线指引'}
           </button>
           {/* <button className="w-full py-3 bg-white text-black font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors duration-200">
             预订场地
           </button> */}
         </div>
+
+        {/* 详细信息展示区域 */}
+        {showDetails && (
+          <div className="bg-white rounded-2xl shadow-lg p-6 mt-6 border border-gray-100 animate-fade-in">
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">地图引导</h3>
+              <p className="text-gray-600 text-sm">详细的入场路线指引</p>
+            </div>
+            
+            <div className="w-full rounded-xl overflow-hidden">
+              <img 
+                src="./src/assets/venue2.jpg"
+                alt="入场路线地图引导"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            
+            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-medium text-blue-900 mb-2">入场提示：</h4>
+              <ul className="text-sm text-blue-800 space-y-1">
+                <li>• 从地铁站出发，按照图中路线指引前往</li>
+                <li>• 注意查看建筑标识和门牌号</li>
+
+              </ul>
+            </div>
+          </div>
+        )}
 
         {/* 活动时间表 */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mt-6 border border-gray-100">
