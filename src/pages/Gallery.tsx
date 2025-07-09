@@ -71,7 +71,7 @@ const Gallery = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-green-600">100%</div>
-                <div className="text-sm text-gray-500">AI辅助开发</div>
+                <div className="text-sm text-gray-500">Cursor开发</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-purple-600">多领域</div>
