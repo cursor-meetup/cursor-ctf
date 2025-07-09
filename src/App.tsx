@@ -19,8 +19,8 @@ const AppContent = () => {
         <Route path="/login" element={
           isAuthenticated ? <Navigate to="/" replace /> : <Login />
         } />
-        <Route path="/" element={<Home />} />
-        <Route path="/venue" element={<Venue />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Venue />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/admin" element={<Admin />} />
