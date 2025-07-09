@@ -11,6 +11,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // 隐藏区域点击计数
+  const [clickCount, setClickCount] = useState(0);
+  const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
 
   // 检查是否已登录
   useEffect(() => {
@@ -18,6 +22,31 @@ const Login = () => {
       navigate('/');
     }
   }, [isAuthenticated, navigate]);
+
+  // 处理隐藏区域点击
+  const handleHiddenAreaClick = () => {
+    // 清除之前的超时
+    if (clickTimeout) {
+      clearTimeout(clickTimeout);
+    }
+
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount >= 3) {
+      // 连续点击3次，跳转到admin页面
+      navigate('/admin');
+      setClickCount(0);
+      return;
+    }
+
+    // 设置2秒超时，如果2秒内没有继续点击，重置计数
+    const timeout = setTimeout(() => {
+      setClickCount(0);
+    }, 2000);
+    
+    setClickTimeout(timeout);
+  };
 
   // 输入验证
   const validateInput = () => {
@@ -68,6 +97,14 @@ const Login = () => {
     <div className="min-h-screen relative flex items-center justify-center p-4 pb-20 bg-gradient-to-br from-gray-100 to-gray-200">
       {/* 流星雨效果 */}
       <MeteorBackground />
+
+      {/* 隐藏的左上角点击区域 */}
+      <div 
+        onClick={handleHiddenAreaClick}
+        className="absolute top-4 left-4 w-16 h-16 z-50 cursor-default opacity-0 hover:opacity-10 transition-opacity duration-300"
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+        title={clickCount > 0 ? `点击次数: ${clickCount}/3` : ''}
+      />
 
       {/* 主容器 */}
       <div className="relative w-full max-w-md z-10">
