@@ -31,6 +31,11 @@ const Admin: React.FC = () => {
     }
   };
 
+  const handleQuickSelect = (key: string) => {
+    setFlagKey(key);
+    showMessage(`已选择 ${key}`, 'success');
+  };
+
   const showMessage = (msg: string, type: 'success' | 'error') => {
     setMessage(msg);
     setMessageType(type);
@@ -85,6 +90,31 @@ const Admin: React.FC = () => {
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
                 onKeyPress={(e) => e.key === 'Enter' && handleAddFlag()}
               />
+            </div>
+
+            {/* 快速导入按钮 */}
+            <div>
+              <label className="block text-sm font-medium mb-2">快速选择</label>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <button
+                  onClick={() => handleQuickSelect('xiaohongshu007')}
+                  className="px-4 py-3 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 rounded-lg transition-all duration-200 font-medium text-center"
+                >
+                  📱 小红书分享达人 (30分)
+                </button>
+                <button
+                  onClick={() => handleQuickSelect('twitter006')}
+                  className="px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-lg transition-all duration-200 font-medium text-center"
+                >
+                  🐦 推特分享之星 (30分)
+                </button>
+                <button
+                  onClick={() => handleQuickSelect('share007')}
+                  className="px-4 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 rounded-lg transition-all duration-200 font-medium text-center"
+                >
+                  🎤 嘉宾分享之星 (30分)
+                </button>
+              </div>
             </div>
 
             {/* 添加按钮 */}

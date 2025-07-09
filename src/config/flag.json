@@ -136,14 +136,19 @@
       "description": "Cursor Insider 中文社区"
     },
     {
-      "key": "xiaohongshu",
+      "key": "xiaohongshu007",
       "points": 30,
       "description": "小红书分享达人"
     },
     {
-      "key": "twitter",
+      "key": "twitter006",
       "points": 30,
       "description": "推特分享之星"
+    },
+    {
+      "key": "share007",
+      "points": 30,
+      "description": "嘉宾分享之星"
     }
   ]
 }
