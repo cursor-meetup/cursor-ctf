@@ -134,6 +134,16 @@
       "key": "cursorinsider",
       "points": 10,
       "description": "Cursor Insider 中文社区"
+    },
+    {
+      "key": "xiaohongshu",
+      "points": 30,
+      "description": "小红书分享达人"
+    },
+    {
+      "key": "twitter",
+      "points": 30,
+      "description": "推特分享之星"
     }
   ]
 }
