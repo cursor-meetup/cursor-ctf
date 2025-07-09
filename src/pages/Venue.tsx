@@ -23,7 +23,7 @@ const Venue = () => {
               rel="noopener noreferrer"
               className="block hover:opacity-90 transition-opacity duration-200"
             >
-                              <img 
+                <img 
                   src="https://restapi.amap.com/v3/staticmap?location=120.005060,30.292772&zoom=17&size=750*400&markers=mid,,A:120.005060,30.292772&key=009dbec2a6e19d47163882e3f1a61541"
                   alt="场地位置地图 - 杭州梦想小镇互联网村21幢"
                   className="w-full h-auto object-cover cursor-pointer"
