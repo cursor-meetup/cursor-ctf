@@ -131,7 +131,7 @@ const Admin: React.FC = () => {
           <div className="mt-8">
             <details className="group">
               <summary className="cursor-pointer text-lg font-medium mb-4 hover:text-purple-300 transition-colors">
-                <span className="group-open:rotate-90 inline-block transition-transform">▶</span>
+                {/* <span className="group-open:rotate-90 inline-block transition-transform">▶</span> */}
                 查看所有可用的 Flag Keys
               </summary>
               <div className="bg-gray-700 rounded-lg p-4 max-h-80 overflow-y-auto">
