@@ -44,12 +44,12 @@ const Ranking: React.FC = () => {
     
     const currentHour = currentTime.getHours();
     const isAfter17 = currentHour >= 17;
-    const isTop20 = userRanking.rank <= 20;
+    const isTop20 = userRanking.rank <= 150;
   
     
     // 排名不在前20
     if (!isTop20 || !isAfter17) {
-      return { disabled: true, text: ' 17:00后，排名前20名可以领取Cursor纪念币', className: 'bg-gray-400 cursor-not-allowed' };
+      return { disabled: true, text: ' 17:00后，排名前150名可以领取Cursor纪念币', className: 'bg-gray-400 cursor-not-allowed' };
     }
     
     // 满足条件，可以领取

@@ -382,14 +382,14 @@ const Home: React.FC = () => {
                       </div>
 
                       <div className="bg-white p-4 rounded-lg border-l-4 border-purple-400">
-                        <h4 className="font-bold text-lg mb-3">❹尽可能地收集flag，最终17:00后排名前20的同学可以到签到台换取限量Cursor纪念币一枚。</h4>
+                        <h4 className="font-bold text-lg mb-3">❹尽可能地收集flag，最终17:00后排名前150的同学可以到签到台换取限量Cursor纪念币一枚。</h4>
                         <div className="bg-purple-50 p-3 rounded-lg mb-3">
                           <p className="text-sm text-gray-700 mb-2">这里赠送大家一个Flag，复制后粘贴到首页的输入框中，即可获取积分。Have fun！</p>
                           <div className="bg-white p-2 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700">
                             hzcursor2025
                           </div>
                         </div>
-                        <p className="text-purple-600 font-medium">💜 Flag收集挑战，冲击前20名！</p>
+                        <p className="text-purple-600 font-medium">💜 Flag收集挑战，冲击前150名！</p>
                       </div>
 
                       
