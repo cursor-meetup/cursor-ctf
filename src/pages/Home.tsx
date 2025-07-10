@@ -346,8 +346,8 @@ const Home: React.FC = () => {
                       <p className="text-lg font-medium mb-4">想集齐4款Cursor限量贴纸？</p>
                       
                       <div className="bg-green-50 p-4 rounded-lg mb-4">
-                        <p className="text-green-800 font-medium">✅完成以下任意一个任务，即可领取1枚Cursor纪念币（限前200名，每人仅限1枚）！</p>
                         <p className="text-green-800 font-medium">✅完成每一项任务，都可以领取1款Cursor限量贴纸！</p>
+                        <p className="text-green-800 font-medium">✅寻找Flag获取积分，最终17:00后排名前150的同学可以到签到台换取限量Cursor纪念币一枚！</p>
                       </div>
                       
                       <div className="bg-red-50 p-4 rounded-lg mb-6">
@@ -357,7 +357,7 @@ const Home: React.FC = () => {
 
                     <div className="space-y-6">
                       <div className="bg-white p-4 rounded-lg border-l-4 border-pink-400">
-                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈或微信群/飞书群里。</h4>
+                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈。</h4>
                         <p className="text-pink-600 font-medium">💖 完成后，可领取 1 款 Cursor限量贴纸！</p>
                       </div>
 
