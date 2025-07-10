@@ -128,7 +128,7 @@ const Venue = () => {
             <div className="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
               <div className="flex-shrink-0 w-20 text-sm font-medium text-purple-700">14:25-14:55</div>
               <div className="flex-1 text-sm text-gray-800">
-                <div className="font-medium mb-1">官方连线&集体合影</div>
+                <div className="font-medium mb-1">Cursor Engineer 连线</div>
               </div>
             </div>
             
