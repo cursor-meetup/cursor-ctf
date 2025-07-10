@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MeteorBackground from "../components/MeteorBackground";
 
 const projects = [
@@ -7,42 +7,70 @@ const projects = [
     subtitle: "记录分享探索梦想的创新平台",
     description: "把每一个梦想都变成一个独特的故事，把全世界的梦想家联系起来。Cursor1H黑客松获奖作品",
     url: "http://47.83.178.124:3000/",
-    category: "黑客松获奖作品"
+    category: "黑客松获奖作品",
+    flagKey: "dreamplatform",
+    flagDescription: "1h黑客松获奖作品"
   },
   {
     title: "Elasticsearch查询构建器",
     subtitle: "支持JSON格式数据查询的Web应用",
     description: "允许用户轻松创建JSON格式的数据查询，支持条件管理、查询持久化、搜索、导入/导出、多语言和主题切换",
     url: "https://oktaykcr.github.io/elasticsearch-query-builder/",
-    category: "完全使用Cursor AI开发"
+    category: "完全使用Cursor AI开发",
+    flagKey: "querybuilder",
+    flagDescription: "Elasticsearch查询构建器创作者"
   },
   {
     title: "AI应用规划助手",
     subtitle: "从零开始规划新应用的智能工具",
     description: "帮助用户从零开始规划新应用，或在现有代码库基础上完善功能。AI通过提问澄清设计决策，最终生成逐步的实现计划",
     url: "https://useprd.com/",
-    category: "AI辅助开发工具"
+    category: "AI辅助开发工具",
+    flagKey: "prdplanner",
+    flagDescription: "PRD产品规划工具开发者"
   },
   {
     title: "硬盘价格比较器",
     subtitle: "亚马逊最佳硬盘价格查找工具",
     description: "帮助用户在亚马逊上查找最佳硬盘和存储设备价格的工具，前端采用Next.js，后端切换至.NET",
     url: "https://pricepergig.com/",
-    category: "Cursor AI构建MVP"
+    category: "Cursor AI构建MVP",
+    flagKey: "pricepergig",
+    flagDescription: "硬盘价格比较工具创造者"
   },
   {
     title: "角色化记录App",
     subtitle: "创新型家庭生活记录应用",
     description: "以角色化记录为核心的创新型应用，全方位覆盖家庭成员的生活记录需求，文科生利用cursor从零开发",
     url: "https://niu.sspai.com/post/100782",
-    category: "文科生开发实记"
+    category: "文科生开发实记",
+    flagKey: "familyrecord",
+    flagDescription: "角色化记录应用开发者"
   },
-
 ];
 
 const Gallery = () => {
-  const handleProjectClick = (url: string) => {
-    window.open(url, '_blank');
+  const [visitedProjects, setVisitedProjects] = useState<string[]>([]);
+
+  useEffect(() => {
+    // 从localStorage加载访问过的项目
+    const visited = localStorage.getItem('visitedProjects');
+    if (visited) {
+      setVisitedProjects(JSON.parse(visited));
+    }
+  }, []);
+
+  const handleProjectClick = (idx: number) => {
+    const project = projects[idx];
+    
+    // 记录访问
+    const newVisited = [...visitedProjects, project.flagKey];
+    const uniqueVisited = Array.from(new Set(newVisited));
+    setVisitedProjects(uniqueVisited);
+    localStorage.setItem('visitedProjects', JSON.stringify(uniqueVisited));
+    
+    // 直接跳转
+    window.open(project.url, '_blank');
   };
 
   return (
@@ -50,9 +78,6 @@ const Gallery = () => {
       {/* 流星雨背景 */}
       <MeteorBackground />
 
-       
-        
-      
       <div className="max-w-4xl mx-auto relative">
         {/* 页面标题 */}
         <div className="text-center mb-8">
@@ -86,8 +111,10 @@ const Gallery = () => {
           {projects.map((project, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer group"
-              onClick={() => handleProjectClick(project.url)}
+              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border ${
+                visitedProjects.includes(project.flagKey) ? 'border-green-500 ring-2 ring-green-200' : 'border-gray-100'
+              } cursor-pointer group`}
+              onClick={() => handleProjectClick(idx)}
             >
               {/* 预览区域 */}
               <div className="w-full h-48 bg-gray-100 relative overflow-hidden">
@@ -121,6 +148,20 @@ const Gallery = () => {
                 <p className="text-sm text-gray-500 leading-relaxed">
                   {project.description}
                 </p>
+
+                {/* Flag展示区域 - 只在访问过后显示 */}
+                {visitedProjects.includes(project.flagKey) && (
+                  <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 animate-fade-in">
+                    <div className="text-center">
+                      <div className="text-sm font-bold text-gray-700 mb-1">🎯 Flag</div>
+                      <div className="bg-white px-3 py-1 rounded-lg shadow-sm">
+                        <div className="font-mono text-sm text-green-600 font-bold">
+                          {project.flagKey}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
