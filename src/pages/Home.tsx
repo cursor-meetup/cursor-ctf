@@ -357,7 +357,7 @@ const Home: React.FC = () => {
 
                     <div className="space-y-6">
                       <div className="bg-white p-4 rounded-lg border-l-4 border-pink-400">
-                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈。</h4>
+                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈或微信群/飞书群里。</h4>
                         <p className="text-pink-600 font-medium">💖 完成后，可领取 1 款 Cursor限量贴纸！</p>
                       </div>
 

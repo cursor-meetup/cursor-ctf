@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const navs = [
   { label: "首页", path: "/home", icon: "🏠" },
   { label: "指引", path: "/", icon: "📍" },
-  { label: "展示", path: "/gallery", icon: "🖼️" },
+  // { label: "展示", path: "/gallery", icon: "🖼️" },
   { label: "排名", path: "/ranking", icon: "🏆" },
 ];
 

@@ -31,12 +31,12 @@
       "description": "互联网村的科技魅力"
     },
     {
-      "key": "timnocode",
+      "key": "tim",
       "points": 10,
       "description": "覃貌Tim的无代码突破之路"
     },
     {
-      "key": "htmlmanipulation",
+      "key": "baipao",
       "points": 10,
       "description": "白袍的HTML操作智慧"
     },
@@ -46,9 +46,14 @@
       "description": "Ray的AI合伙人创业故事"
     },
     {
-      "key": "standupcoding",
+      "key": "standup",
       "points": 10,
       "description": "负一的脱口秀编程艺术"
+    },
+    {
+      "key": "vibecoder",
+      "points": 10,
+      "description": "人人都是Vibe Coder"
     },
     {
       "key": "vibecoding",
@@ -66,7 +71,7 @@
       "description": "集体合影的美好时刻"
     },
     {
-      "key": "networkingtime",
+      "key": "networking",
       "points": 10,
       "description": "自由Networking的连接时光"
     },
@@ -96,17 +101,17 @@
       "description": "产品反馈贡献者"
     },
     {
-      "key": "startupat14",
+      "key": "at14",
       "points": 10,
       "description": "14岁创业的勇气与智慧"
     },
     {
-      "key": "travelproduct",
+      "key": "travel",
       "points": 10,
       "description": "DH的旅行产品创新"
     },
     {
-      "key": "volunteersecret",
+      "key": "volunteer",
       "points": 10,
       "description": "志愿者的神秘惊喜"
     },
@@ -116,7 +121,7 @@
       "description": "CursorMeetupHangzhou话题达人"
     },
     {
-      "key": "yuchenconnect",
+      "key": "yuchen",
       "points": 10,
       "description": "与YuChen的特别连接"
     },
