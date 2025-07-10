@@ -6,19 +6,7 @@ Cursor Meetup HangZhou：「让开发更高效，让创造更简单」
 - 收集Cursor社区用户的产品反馈与潜在新功能建议
 2. 活动议程（7月12日 2pm-6pm，梦想小镇互联网村）
 时间环节/嘉宾主题
-13:30-14:20 | 签到
-14:00-14:10 | 开场
-14:10-14:25 | 覃貌Tim 用Cursor突破无代码工具的天花板
-14:25-14:40 | 白袍 Everything is about Html manipulation - experience of content producing with cursor/内容生产本质上就是 HTML 操作 —— 结合 Cursor 的实际使用经
-14:40-15:05 | Ray + Startup at 14: How Cursor Became My AI Co-Founder
-15:05-15:30 | Ray-官方连线
-15:30-16:00 | 集体合影&茶歇
-16:00-16:15 | 负一 用Cursor写脱口秀
-16:15-16:30 | SHINJI 不会写一行代码的产品经理，如何用Cursor搭建一个短视频全链路创作网站
-16:30-16:45 | Zy:  Vibe Coding, or Vibe over Coding？使用Cursor 的一些思考
-16:45-17:00 | DH ：用cursor搓出一款日活过万的旅行产品
-17:00-17:30 | 抽奖 & 自由讨论
-17:30-18:00 | 自由 Networking 时间 & 离场
+
 3. 活动互动与连接策略
 🏆 赢取 Cursor 社区周边！
 🏷️ 限量贴纸 &  限量纪念币

@@ -116,9 +116,9 @@
       "description": "CursorMeetupHangzhou话题达人"
     },
     {
-      "key": "benconnect",
+      "key": "yuchenconnect",
       "points": 10,
-      "description": "与Ben的特别连接"
+      "description": "与YuChen的特别连接"
     },
     {
       "key": "tshirtwinner",
@@ -149,6 +149,31 @@
       "key": "share007",
       "points": 30,
       "description": "嘉宾分享之星"
+    },
+    {
+      "key": "querybuilder",
+      "points": 10,
+      "description": "Elasticsearch查询构建器创作者"
+    },
+    {
+      "key": "prdplanner",
+      "points": 10,
+      "description": "PRD产品规划工具开发者"
+    },
+    {
+      "key": "pricepergig",
+      "points": 10,
+      "description": "硬盘价格比较工具创造者"
+    },
+    {
+      "key": "familyrecord",
+      "points": 10,
+      "description": "角色化记录应用开发者"
+    },
+    {
+      "key": "dreamplatform",
+      "points": 10,
+      "description": "1h黑客松获奖作品"
     }
   ]
 }
