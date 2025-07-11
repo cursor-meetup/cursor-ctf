@@ -366,7 +366,7 @@ const Home: React.FC = () => {
                         <ul className="space-y-2 mb-3">
                           <li className="flex items-start">
                             <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                            <span><strong>X (Twitter)：</strong> @Benlang #CursorMeetupHangzhou，告诉大家你来啦！</span>
+                            <span><strong>X (Twitter)：</strong> #CursorMeetupHangzhou，告诉大家你来啦！</span>
                           </li>
                           <li className="flex items-start">
                             <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
