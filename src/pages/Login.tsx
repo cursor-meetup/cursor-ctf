@@ -128,6 +128,9 @@ const Login = () => {
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 用户名
               </label>
+              <p className="text-xs text-gray-500">
+                用户名用于积分排名，可以随意定义，不能和他人重复
+              </p>
               <div className="relative">
                 <input
                   id="username"
@@ -152,6 +155,9 @@ const Login = () => {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 密码
               </label>
+              <p className="text-xs text-gray-500">
+                活动结束后账号会自动注销，所以不需要设置复杂密码，自己能记住即可
+              </p>
               <input
                 id="password"
                 name="password"
@@ -190,10 +196,11 @@ const Login = () => {
           </form>
 
           {/* 说明文字 */}
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center space-y-1">
             <p className="text-sm text-gray-600">
               首次使用将自动创建账户
             </p>
+     
           </div>
         </div>
 
