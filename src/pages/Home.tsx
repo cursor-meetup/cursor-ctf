@@ -383,6 +383,19 @@ const Home: React.FC = () => {
 
                       <div className="bg-white p-4 rounded-lg border-l-4 border-purple-400">
                         <h4 className="font-bold text-lg mb-3">❹尽可能地收集flag，最终17:00后排名前150的同学可以到签到台换取限量Cursor纪念币一枚。</h4>
+                        
+                        <div className="bg-blue-50 p-3 rounded-lg mb-3">
+                          <h5 className="font-semibold text-blue-800 mb-2">📋 Flag活动细则：</h5>
+                          <ul className="text-sm text-blue-700 space-y-1">
+                            <li>• 参与活动需要注册账号（活动结束后账号会自动注销，所以不需要设置复杂密码，自己能记住即可）</li>
+                            <li>• 注册账号方便用于统计积分排名</li>
+                            <li>• 参与分享后在现场群里分享链接并备注本次活动的账号名即可自动获取30积分</li>
+                            <li>• 在活动中的嘉宾分享PPT中，也可能有一些关键词会是flag</li>
+                            <li>• 你能联想到和本次活动相关的文案也有可能是flag</li>
+                            <li>• flag由纯小写英文/小写英文+数字组成，大胆尝试吧~</li>
+                          </ul>
+                        </div>
+                        
                         <div className="bg-purple-50 p-3 rounded-lg mb-3">
                           <p className="text-sm text-gray-700 mb-2">这里赠送大家一个Flag，复制后粘贴到首页的输入框中，即可获取积分。Have fun！</p>
                           <div className="bg-white p-2 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700">
