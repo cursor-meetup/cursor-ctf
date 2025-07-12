@@ -13,7 +13,6 @@ const Ranking: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [showPrizeDialog, setShowPrizeDialog] = useState(false);
-  const [prizePassword, setPrizePassword] = useState('');
   const [prizeLoading, setPrizeLoading] = useState(false);
   const [prizeError, setPrizeError] = useState('');
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -22,38 +21,55 @@ const Ranking: React.FC = () => {
   // 检查是否满足领奖条件
   const checkPrizeEligibility = () => {
     if (!userRanking) return false;
-    
+
     // 检查当前时间是否在17:00之后
     const currentHour = currentTime.getHours();
     const isAfter17 = currentHour >= 17;
-    
+
     // 检查排名是否在前20
     const isTop20 = userRanking.rank <= 20;
-    
+
     return isAfter17 && isTop20;
   };
 
   // 获取领奖按钮的状态和文本
   const getPrizeButtonState = () => {
-    if (!userRanking) return { disabled: true, text: '获取排名中...', className: 'bg-gray-400 cursor-not-allowed' };
-    
+    if (!userRanking)
+      return {
+        disabled: true,
+        text: '获取排名中...',
+        className: 'bg-gray-400 cursor-not-allowed',
+      };
+
     // 已经领取过奖励
     if (userRanking.has_claimed_prize) {
-      return { disabled: true, text: '已领取奖励', className: 'bg-gray-400 cursor-not-allowed' };
+      return {
+        disabled: true,
+        text: '已领取奖励',
+        className: 'bg-gray-400 cursor-not-allowed',
+      };
     }
-    
+
     const currentHour = currentTime.getHours();
     const isAfter17 = currentHour >= 17;
     const isTop20 = userRanking.rank <= 150;
-  
-    
+
     // 排名不在前20
     if (!isTop20 || !isAfter17) {
-      return { disabled: true, text: ' 17:00后，排名前150名可以领取Cursor纪念币', className: 'bg-gray-400 cursor-not-allowed' };
+      return {
+        disabled: true,
+        text: ' 17:00后，排名前150名可以领取Cursor纪念币',
+        className: 'bg-gray-400 cursor-not-allowed',
+      };
     }
-    
+
     // 满足条件，可以领取
-    return { disabled: false, text: '🎁 领取奖励', className: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg' };
+    return {
+      disabled: false,
+      text: '🎁 领取奖励',
+      className:
+        'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg',
+    };
   };
 
   // 定期更新时间，以便按钮状态能够实时更新
@@ -89,7 +105,9 @@ const Ranking: React.FC = () => {
         // 如果用户已登录，获取用户排名
         if (currentUser) {
           try {
-            const userRankingData = await rankingService.getUserRanking(currentUser);
+            const userRankingData = await rankingService.getUserRanking(
+              currentUser
+            );
             setUserRanking(userRankingData);
           } catch (err: any) {
             console.error('获取用户排名失败:', err);
@@ -101,23 +119,27 @@ const Ranking: React.FC = () => {
         }
 
         // 订阅排行榜更新
-        rankingSubscription = rankingService.subscribeToRankingUpdates(async () => {
-          try {
-            const updatedRankings = await rankingService.getRankings();
-            setRankings(updatedRankings);
+        rankingSubscription = rankingService.subscribeToRankingUpdates(
+          async () => {
+            try {
+              const updatedRankings = await rankingService.getRankings();
+              setRankings(updatedRankings);
 
-            if (currentUser) {
-              const updatedUserRanking = await rankingService.getUserRanking(currentUser);
-              setUserRanking(updatedUserRanking);
-            }
-          } catch (err: any) {
-            console.error('更新排行榜失败:', err);
-            // 如果是授权相关错误，清除登录状态
-            if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
-              authService.logout();
+              if (currentUser) {
+                const updatedUserRanking = await rankingService.getUserRanking(
+                  currentUser
+                );
+                setUserRanking(updatedUserRanking);
+              }
+            } catch (err: any) {
+              console.error('更新排行榜失败:', err);
+              // 如果是授权相关错误，清除登录状态
+              if (err?.code === 'PGRST301' || err?.message?.includes('JWT')) {
+                authService.logout();
+              }
             }
           }
-        });
+        );
       } catch (err: any) {
         console.error('获取排行榜失败:', err);
         setError('获取排行榜数据失败，请刷新页面重试');
@@ -142,11 +164,6 @@ const Ranking: React.FC = () => {
       return;
     }
 
-    if (!prizePassword.trim()) {
-      setPrizeError('请输入密码');
-      return;
-    }
-
     // 检查是否满足领奖条件
     if (!checkPrizeEligibility()) {
       setPrizeError('您还不满足领奖条件');
@@ -157,14 +174,6 @@ const Ranking: React.FC = () => {
     setPrizeError('');
 
     try {
-      // 验证密码
-      const correctPassword = '0000';
-      if (prizePassword !== correctPassword) {
-        setPrizeError('密码错误');
-        setPrizeLoading(false);
-        return;
-      }
-
       // 检查用户是否已经领取过奖励
       const { data: userData, error: userError } = await supabase
         .from('users')
@@ -183,8 +192,10 @@ const Ranking: React.FC = () => {
       }
 
       // 使用数据库函数更新用户奖励状态
-      const { data: claimResult, error: claimError } = await supabase
-        .rpc('claim_prize', { target_username: currentUser });
+      const { data: claimResult, error: claimError } = await supabase.rpc(
+        'claim_prize',
+        { target_username: currentUser }
+      );
 
       if (claimError) {
         throw claimError;
@@ -198,11 +209,11 @@ const Ranking: React.FC = () => {
       }
 
       // 立即更新本地状态，确保UI立即反映变化
-      setUserRanking(prevRanking => {
+      setUserRanking((prevRanking) => {
         if (prevRanking) {
           return {
             ...prevRanking,
-            has_claimed_prize: true
+            has_claimed_prize: true,
           };
         }
         return prevRanking;
@@ -211,7 +222,9 @@ const Ranking: React.FC = () => {
       // 刷新用户排名数据（作为备用确保数据同步）
       if (currentUser) {
         try {
-          const updatedUserRanking = await rankingService.getUserRanking(currentUser);
+          const updatedUserRanking = await rankingService.getUserRanking(
+            currentUser
+          );
           setUserRanking(updatedUserRanking);
         } catch (err) {
           console.error('刷新用户排名数据失败:', err);
@@ -221,7 +234,6 @@ const Ranking: React.FC = () => {
 
       // 关闭弹窗并显示成功提示
       setShowPrizeDialog(false);
-      setPrizePassword('');
       alert('恭喜您！奖励领取成功！');
     } catch (error: any) {
       console.error('领取奖励失败:', error);
@@ -257,7 +269,7 @@ const Ranking: React.FC = () => {
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 pb-20 relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
-      
+
       {/* 登录/退出按钮 */}
       <div className="absolute top-4 right-4">
         {currentUser ? (
@@ -281,12 +293,16 @@ const Ranking: React.FC = () => {
       </div>
 
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">排行榜</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          排行榜
+        </h1>
 
         {/* 未登录提示 */}
         {!currentUser && (
           <div className="bg-black border border-gray-200 rounded-lg p-6 mb-8 text-center">
-            <p className="text-2xl text-gray-100 mb-4">登录后查看您的排名和积分</p>
+            <p className="text-2xl text-gray-100 mb-4">
+              登录后查看您的排名和积分
+            </p>
           </div>
         )}
 
@@ -296,11 +312,15 @@ const Ranking: React.FC = () => {
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
                 <p className="text-sm text-gray-400">当前排名</p>
-                <p className="text-2xl font-bold text-white">#{userRanking.rank}</p>
+                <p className="text-2xl font-bold text-white">
+                  #{userRanking.rank}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-gray-400">总分</p>
-                <p className="text-2xl font-bold text-white">{userRanking.total_score}</p>
+                <p className="text-2xl font-bold text-white">
+                  {userRanking.total_score}
+                </p>
               </div>
             </div>
           </div>
@@ -316,7 +336,9 @@ const Ranking: React.FC = () => {
                 }
               }}
               disabled={getPrizeButtonState().disabled}
-              className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-colors duration-200 ${getPrizeButtonState().className}`}
+              className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-colors duration-200 ${
+                getPrizeButtonState().className
+              }`}
             >
               {getPrizeButtonState().text}
             </button>
@@ -328,20 +350,29 @@ const Ranking: React.FC = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   排名
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   用户
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   分数
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {rankings.map((item) => (
-                <tr 
+                <tr
                   key={item.username}
                   className={currentUser === item.username ? 'bg-gray-50' : ''}
                 >
@@ -373,18 +404,7 @@ const Ranking: React.FC = () => {
             <div className="text-center mb-6">
               <div className="text-6xl mb-4">🎁</div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">领取奖励</h3>
-              <p className="text-gray-600">请输入密码以领取您的奖励</p>
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="password"
-                placeholder="请输入密码"
-                value={prizePassword}
-                onChange={(e) => setPrizePassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
-                disabled={prizeLoading}
-              />
+              <p className="text-gray-600">确认领取您的奖励吗？</p>
             </div>
 
             {prizeError && (
@@ -397,7 +417,6 @@ const Ranking: React.FC = () => {
               <button
                 onClick={() => {
                   setShowPrizeDialog(false);
-                  setPrizePassword('');
                   setPrizeError('');
                 }}
                 disabled={prizeLoading}
@@ -420,4 +439,4 @@ const Ranking: React.FC = () => {
   );
 };
 
-export default Ranking; 
+export default Ranking;
