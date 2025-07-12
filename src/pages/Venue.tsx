@@ -15,10 +15,29 @@ const Venue = () => {
       
       <div className="max-w-md mx-auto relative">
         {/* 页面标题 */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">入场指引</h1>
-          <p className="text-gray-600">欢迎每一位Cursor Meetup Hangzhou的参与者</p>
+        <div className="text-center mb-4">
+          {/* <h1 className="text-3xl font-bold text-gray-900 mb-2">入场指引</h1> */}
+          {/* <p className="text-gray-600">欢迎每一位Cursor Meetup Hangzhou的参与者</p> */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">Hi，Dear</h2>
+            <div className="space-y-2">
+              <p className="text-gray-700 font-semibold">一定要！记得！请提前打开</p>
+              <p className="text-gray-700 font-semibold text-xl">luma二维码签到</p>
+              <p className="text-gray-700 font-semibold">以便顺利进入流程~</p>
+            </div>
+          </div>
         </div>
+        {/* 重要提示 */}
+        {/* <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 mb-6 animate-pulse">
+          <div className="text-center">
+            <h2 className="text-lg font-bold text-gray-800 mb-3">Hi，Dear</h2>
+            <div className="space-y-2">
+              <p className="text-gray-700 font-semibold">一定要！记得！请提前打开</p>
+              <p className="text-gray-700 font-semibold text-xl">luma二维码签到</p>
+              <p className="text-gray-700 font-semibold">以便顺利进入流程~</p>
+            </div>
+          </div>
+        </div> */}
         
         {/* 场地信息卡片 */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
@@ -60,7 +79,7 @@ const Venue = () => {
         </div>
         
         {/* 功能按钮 */}
-        <div className="space-y-3">
+        <div className="space-y-3 mb-4">
           <button 
             onClick={handleShowDetails}
             className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200"
@@ -91,7 +110,7 @@ const Venue = () => {
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
               <h4 className="font-medium text-blue-900 mb-2">入场提示：</h4>
               <ul className="text-sm text-blue-800 space-y-1">
-                <li>• 从地铁站出发，按照图中路线指引前往</li>
+                <li>• 按照图中路线指引前往</li>
                 <li>• 注意查看建筑标识和门牌号</li>
 
               </ul>
