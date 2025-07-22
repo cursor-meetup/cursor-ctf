@@ -67,7 +67,7 @@ const Venue = () => {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-500">容量：</span>
-                  <span className="font-medium">500人</span>
+                  <span className="font-medium">300人</span>
                 </div>
                 <div>
                   <span className="text-gray-500">状态：</span>

@@ -112,7 +112,7 @@ const Login = () => {
         <div className="text-center mb-8 animate-fade-in">
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-2 animate-float-title">
-              Cursor Meetup Hangzhou
+              Cursor Meetup Nanjing
             </h1>
             <p className="text-gray-700 text-sm">
               登录您的账户（新用户将自动注册）
@@ -206,7 +206,7 @@ const Login = () => {
 
         {/* 底部装饰 */}
         <div className="text-center mt-8 text-xs text-gray-600">
-          © 2025 Cursor Meetup Hangzhou
+          © 2025 Cursor Meetup Nanjing
         </div>
       </div>
     </div>

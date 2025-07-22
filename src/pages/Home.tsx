@@ -241,7 +241,7 @@ const Home: React.FC = () => {
           {/* 标题 */}
           <div className="text-center mb-8">
             {username && <p className="text-xl text-gray-700 mb-2">Hi，{username} 欢迎来到</p>}
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Cursor Meetup Hangzhou</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Cursor Meetup Nanjing</h1>
             <p className="text-gray-600">请输入正确的口令以继续</p>
             {totalPoints > 0 && <p className="text-lg font-semibold text-black mt-4">当前积分: {totalPoints}</p>}
           </div>
@@ -333,83 +333,85 @@ const Home: React.FC = () => {
                     ×
                   </button>
                 </div>
-                
-                {/* 活动说明内容区域 - 预留足够大的空间 */}
+                {/* 活动说明内容区域 */}
                 <div className="min-h-[400px] max-h-[60vh] overflow-y-auto bg-gray-50 p-6 rounded-lg mb-6">
-                  <div className="text-gray-800 leading-relaxed">
-                    <h3 className="text-xl font-bold text-center mb-6 text-red-600">
-                      ❤️‍🔥Cursor Meetup Hangzhou玩转攻略
-                    </h3>
-                    
-                    <div className="mb-6">
-                      <p className="text-lg font-medium mb-2">想领取超酷的Cursor纪念币？</p>
-                      <p className="text-lg font-medium mb-4">想集齐4款Cursor限量贴纸？</p>
-                      
-                      <div className="bg-green-50 p-4 rounded-lg mb-4">
-                        <p className="text-green-800 font-medium">✅完成每一项任务，都可以领取1款Cursor限量贴纸！</p>
-                        <p className="text-green-800 font-medium">✅寻找Flag获取积分，最终17:00后排名前150的同学可以到签到台换取限量Cursor纪念币一枚！</p>
-                      </div>
-                      
-                      <div className="bg-red-50 p-4 rounded-lg mb-6">
-                        <p className="text-red-800 font-bold text-center">完成后，分享到群里，方便验证</p>
+                  <div className="text-gray-800 leading-relaxed space-y-8">
+                    {/* 主题与目标 */}
+                    <div>
+                      <h3 className="text-xl font-bold text-center mb-4 text-red-600">「让开发更高效，让创造更简单」</h3>
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-blue-400 mb-2">
+                        <p className="font-bold text-lg mb-2">活动核心目标：</p>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-1">
+                          <li>建立参会者与 <span className="font-semibold text-black">Cursor 社区</span> 之间的深层连接，增强归属感</li>
+                          <li>80% 以上参会者加入微信群等线上社区并保持活跃</li>
+                          <li>收集产品反馈与新功能建议</li>
+                        </ul>
                       </div>
                     </div>
-
-                    <div className="space-y-6">
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-pink-400">
-                        <h4 className="font-bold text-lg mb-2">❶分享Cursor中文圈报名公众号文章到朋友圈或微信群/飞书群里。</h4>
-                        <p className="text-pink-600 font-medium">💖 完成后，可领取 1 款 Cursor限量贴纸！</p>
-                      </div>
-
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-400">
-                        <h4 className="font-bold text-lg mb-3">❷选你最爱的平台，分享你的参会热情！</h4>
-                        <ul className="space-y-2 mb-3">
-                          <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                            <span><strong>X (Twitter)：</strong> #CursorMeetupHangzhou，告诉大家你来啦！</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                            <span><strong>小红书：</strong> 发篇图文或视频，@CursorInsider #CursorMeetupHangzhou，晒晒你的 Meetup 瞬间！</span>
-                          </li>
+                    {/* 活动议程 */}
+                    <div>
+                      <h4 className="font-bold text-lg mb-2 text-purple-700">活动议程（8月9日 14:00-18:00）</h4>
+                      <div className="bg-purple-50 p-3 rounded-lg text-sm text-gray-700">
+                        <ul className="list-disc pl-6 space-y-1">
+                          <li>开场 & 社区介绍</li>
+                          <li>嘉宾主题分享：<span className="font-semibold">大模型开发者生态、MCP工具、AI项目实战、认知心理学AI成长系统</span> 等</li>
+                          <li>官方神秘环节</li>
+                          <li>互动交流 & Q&A</li>
+                          <li>积分排名与福利兑换</li>
                         </ul>
-                        <p className="text-yellow-600 font-medium">💛分享成功，领取1款Cursor限量贴纸！（双平台分享可领取2款）</p>
                       </div>
-
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-green-400">
-                        <h4 className="font-bold text-lg mb-2">❸嘉宾Q&A环节：交流互动，碰撞思路</h4>
-                        <p className="text-green-600 font-medium">💚参与互动，可领取1款Cursor 限量贴纸！</p>
-                      </div>
-
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-purple-400">
-                        <h4 className="font-bold text-lg mb-3">❹尽可能地收集flag，最终17:00后排名前150的同学可以到签到台换取限量Cursor纪念币一枚。</h4>
-                        
-                        <div className="bg-blue-50 p-3 rounded-lg mb-3">
-                          <h5 className="font-semibold text-blue-800 mb-2">📋 Flag活动细则：</h5>
-                          <ul className="text-sm text-blue-700 space-y-1">
-                            <li>• 参与活动需要注册账号（活动结束后账号会自动注销，所以不需要设置复杂密码，自己能记住即可）</li>
-                            <li>• 注册账号方便用于统计积分排名</li>
-                            <li>• 参与分享后在现场群里分享链接并备注本次活动的账号名即可自动获取30积分</li>
-                            <li>• 在活动中的嘉宾分享PPT中，也可能有一些关键词会是flag</li>
-                            <li>• 你能联想到和本次活动相关的文案也有可能是flag</li>
-                            <li>• flag由纯小写英文/小写英文+数字组成，大胆尝试吧~</li>
+                    </div>
+                    {/* 互动与连接策略 */}
+                    <div>
+                      <h4 className="font-bold text-lg mb-2 text-pink-600">互动任务 & 贴纸/纪念币领取攻略</h4>
+                      <div className="space-y-4">
+                        <div className="bg-white p-4 rounded-lg border-l-4 border-pink-400">
+                          <span className="font-bold">❶</span> 转发报名公众号文章到朋友圈<br/>
+                          <span className="text-pink-600 font-medium">💖 领取1款限量贴纸</span>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-400">
+                          <span className="font-bold">❷</span> 在 <span className="font-semibold">X (Twitter)</span> 或 <span className="font-semibold">小红书</span> 分享参会瞬间<br/>
+                          <span className="text-yellow-600 font-medium">💛 每个平台可领取1款贴纸</span>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border-l-4 border-green-400">
+                          <span className="font-bold">❸</span> 嘉宾Q&A环节积极互动<br/>
+                          <span className="text-green-600 font-medium">💚 领取1款限量贴纸</span>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border-l-4 border-purple-400">
+                          <span className="font-bold">❹</span> 收集flag，积分排名前20可兑换纪念币<br/>
+                          <span className="text-purple-600 font-medium">💜 Flag收集挑战，冲击前20名！</span>
+                        </div>
+                        <div className="bg-blue-50 p-3 rounded-lg text-blue-800 text-sm">
+                          <span className="font-semibold">Flag活动细则：</span>
+                          <ul className="list-disc pl-6 space-y-1">
+                            <li>注册账号参与，账号仅用于活动统计</li>
+                            <li>分享后在群里备注账号名自动获取30积分</li>
+                            <li>嘉宾PPT/活动文案中可能藏有flag，纯小写英文或小写+数字</li>
                           </ul>
                         </div>
-                        
-                        <div className="bg-purple-50 p-3 rounded-lg mb-3">
-                          <p className="text-sm text-gray-700 mb-2">这里赠送大家一个Flag，复制后粘贴到首页的输入框中，即可获取积分。Have fun！</p>
-                          <div className="bg-white p-2 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700">
-                            hzcursor2025
-                          </div>
-                        </div>
-                        <p className="text-purple-600 font-medium">💜 Flag收集挑战，冲击前150名！</p>
                       </div>
-
-                      
+                    </div>
+                    {/* 现场福利 */}
+                    <div>
+                      <h4 className="font-bold text-lg mb-2 text-green-700">现场福利</h4>
+                      <div className="bg-green-50 p-4 rounded-lg text-gray-800">
+                        <ul className="list-disc pl-6 space-y-1">
+                          <li>Cursor 官方限量 T 恤</li>
+                          <li>Cursor 冰淇淋 & 茶歇甜点</li>
+                          <li>Cursor Coin、Cursor Card、超好看贴纸套装</li>
+                          <li>讲师原版 PPT</li>
+                        </ul>
+                      </div>
+                    </div>
+                    {/* 赠送flag */}
+                    <div className="bg-purple-50 p-3 rounded-lg mb-3">
+                      <p className="text-sm text-gray-700 mb-2">这里赠送大家一个Flag，复制后粘贴到首页的输入框中，即可获取积分。Have fun！</p>
+                      <div className="bg-white p-2 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700">
+                        hzcursor2025
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 {/* 底部按钮 */}
                 <div className="flex justify-end gap-3">
                   <button
