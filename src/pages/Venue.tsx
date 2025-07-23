@@ -70,7 +70,7 @@ const Venue = () => {
               className="block hover:opacity-90 transition-opacity duration-200"
             >
                 <img 
-                  src="https://restapi.amap.com/v3/staticmap?location=118.737533,31.980701&zoom=17&size=750*400&markers=mid,,A:118.737533,31.980701&key=f30d60f5b0afbfc41ca5864eba15a03f"
+                  src="https://restapi.amap.com/v3/staticmap?location=118.737533,31.980701&zoom=17&size=750*400&markers=mid,,A:118.737533,31.980701&key=009dbec2a6e19d47163882e3f1a61541"
                   alt="场地位置地图 - 南京市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅"
                   className="w-full h-auto object-cover cursor-pointer"
                   style={{ aspectRatio: "750/400" }}
