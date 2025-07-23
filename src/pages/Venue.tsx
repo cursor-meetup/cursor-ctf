@@ -8,6 +8,12 @@ const Venue = () => {
     setShowDetails(!showDetails);
   };
 
+  const handleLumaSignIn = () => {
+    // 这里先用一个示例链接，您可以稍后替换为实际的luma链接
+    const lumaUrl = "https://lu.ma/rpeixzgx"; // 请替换为实际的luma链接
+    window.open(lumaUrl, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 relative">
       {/* 流星雨背景 */}
@@ -24,6 +30,21 @@ const Venue = () => {
               <p className="text-gray-700 font-semibold">一定要！记得！请提前打开</p>
               <p className="text-gray-700 font-semibold text-xl">luma二维码签到</p>
               <p className="text-gray-700 font-semibold">以便顺利进入流程~</p>
+            </div>
+            
+            {/* Luma签到按钮 */}
+            <div className="mt-4">
+              <button
+                onClick={handleLumaSignIn}
+                className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <span className="flex items-center justify-center space-x-2">
+                  <span className="text-lg">📱</span>
+                  <span>立即打开Luma签到</span>
+                  <span className="text-sm">→</span>
+                </span>
+              </button>
+              <p className="text-xs text-gray-500 text-center mt-2">请使用默认浏览器打开</p>
             </div>
           </div>
         </div>
