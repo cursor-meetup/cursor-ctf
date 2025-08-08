@@ -318,7 +318,7 @@ const Home: React.FC = () => {
                             rel="noopener noreferrer"
                             className="inline-block mt-1 px-3 py-1 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition-colors duration-200 text-xs"
                           >
-                            📱 南京首场 Cursor Meetup！
+                            公众号：南京首场 Cursor Meetup！
                           </a>
                         </div>
                         <div>
@@ -349,25 +349,47 @@ const Home: React.FC = () => {
                       </span>
                     </div>
                     <div className="bg-cyan-50 p-3 rounded-lg border-l-4 border-cyan-400">
-                      <span className="font-bold">❺</span> 在
-                      <span className="font-bold">15:00之前</span>填写问卷
+                      <span className="font-bold">❺</span> 填写问卷任务：
                       <br />
-                      <span className="text-sm text-gray-600 mt-1 mb-2">
-                        有关于Cursor或者AI
-                        Coding您最想了解的问题，我们会挑选总结部分问题现场为你解答
-                      </span>
+                      <div className="text-sm mt-2 space-y-3">
+                        <div>
+                          • 在<span className="font-bold">15:00之前</span>
+                          填写问题收集问卷
+                          <br />
+                          <span className="text-xs text-gray-600 mt-1">
+                            有关于Cursor或者AI
+                            Coding您最想了解的问题，我们会挑选总结部分问题现场为你解答
+                          </span>
+                          <br />
+                          <a
+                            href="https://aicoding.feishu.cn/share/base/form/shrcnN2Ngnhhj1bspWTet09Yzhh"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block mt-1 px-3 py-1 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors duration-200 text-xs"
+                          >
+                            📋 问题收集问卷
+                          </a>
+                        </div>
+                        <div>
+                          • 活动结束后填写反馈问卷
+                          <br />
+                          <span className="text-xs text-gray-600 mt-1">
+                            活动结束后，提出您珍贵的意见，我们会做得更好
+                          </span>
+                          <br />
+                          <a
+                            href="https://aicoding.feishu.cn/share/base/form/shrcnbCDZRX43VsKGgmvxbyaUfh"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block mt-1 px-3 py-1 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200 text-xs"
+                          >
+                            💬 活动反馈问卷
+                          </a>
+                        </div>
+                      </div>
                       <br />
-                      <a
-                        href="https://aicoding.feishu.cn/share/base/form/shrcnN2Ngnhhj1bspWTet09Yzhh"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-2 px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors duration-200 text-sm"
-                      >
-                        📋 点击填写问卷
-                      </a>
-                      <br />
-                      <span className="text-cyan-600 font-medium mt-2">
-                        💎 问题被采纳可获得额外奖励
+                      <span className="text-cyan-600 font-medium">
+                        💎 您的建议对我们十分重要！
                       </span>
                     </div>
                     <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-400">
