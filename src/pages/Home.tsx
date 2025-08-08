@@ -370,7 +370,7 @@ const Home: React.FC = () => {
                           <span className="text-pink-600 font-medium">💖 领取1款限量贴纸</span>
                         </div>
                         <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-400">
-                          <span className="font-bold">❷</span> 在 <span className="font-semibold">X (Twitter)</span> 或 <span className="font-semibold">小红书</span> 分享参会瞬间<br/>
+                          <span className="font-bold">❷</span> 在 <span className="font-semibold">即刻</span> 或 <span className="font-semibold">小红书</span> 分享参会瞬间<br/>
                           <span className="text-yellow-600 font-medium">💛 每个平台可领取1款贴纸</span>
                         </div>
                         <div className="bg-white p-4 rounded-lg border-l-4 border-green-400">
