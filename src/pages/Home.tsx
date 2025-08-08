@@ -271,27 +271,13 @@ const Home: React.FC = () => {
           {/* 活动说明内容 */}
           <div className="mt-6">
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">活动说明</h2>
+              {/* <h2 className="text-xl font-bold text-gray-900 mb-4">活动说明</h2> */}
               <div className="text-gray-800 leading-relaxed space-y-6">
                 {/* 主题与目标 */}
                 <div>
                   <h3 className="text-lg font-bold text-center mb-3 text-red-600">
                     「让开发更高效，让创造更简单」
                   </h3>
-                  <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mb-2">
-                    <p className="font-bold text-base mb-2">活动核心目标：</p>
-                    <ul className="list-disc pl-5 text-gray-700 space-y-1 text-sm">
-                      <li>
-                        建立参会者与{' '}
-                        <span className="font-semibold text-black">
-                          Cursor 社区
-                        </span>{' '}
-                        之间的深层连接，增强归属感
-                      </li>
-                      <li>80% 以上参会者加入微信群等线上社区并保持活跃</li>
-                      <li>收集产品反馈与新功能建议</li>
-                    </ul>
-                  </div>
                 </div>
 
                 {/* 互动任务 */}
