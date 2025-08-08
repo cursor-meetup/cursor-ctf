@@ -1,7 +1,7 @@
 {
   "flags": [
     {
-      "key": "hzcursor2025",
+      "key": "njcursor2025",
       "points": 10,
       "description": "欢迎来到 Cursor Meetup Nanjing"
     },
@@ -16,49 +16,49 @@
       "description": "让创造更简单的愿景"
     },
     {
-      "key": "july12meetup",
+      "key": "aug9meetup",
       "points": 10,
-      "description": "7月12日的精彩聚会"
+      "description": "8月9日的精彩聚会"
     },
     {
-      "key": "dreamtown",
+      "key": "jianyepower",
       "points": 10,
-      "description": "梦想小镇的创新氛围"
+      "description": "建邺赋能的创新氛围"
     },
     {
-      "key": "internetvillage",
+      "key": "jingyuzui",
       "points": 10,
-      "description": "互联网村的科技魅力"
+      "description": "金鱼嘴基金大厦的科技魅力"
     },
     {
-      "key": "tim",
+      "key": "aicodingteam",
       "points": 10,
-      "description": "覃貌Tim的无代码突破之路"
+      "description": "AICoding团队介绍+南京站活动意义"
     },
     {
-      "key": "baipao",
+      "key": "mcptools",
       "points": 10,
-      "description": "白袍的HTML操作智慧"
+      "description": "自定义MCP工具加速软件开发"
     },
     {
-      "key": "aicofounder",
+      "key": "prototypemaker",
       "points": 10,
-      "description": "Ray的AI合伙人创业故事"
+      "description": "Cursor赋能产品原型高效生成"
     },
     {
-      "key": "standup",
+      "key": "fullstackdev",
       "points": 10,
-      "description": "负一的脱口秀编程艺术"
+      "description": "Cursor一站式AI项目开发到部署"
     },
     {
-      "key": "vibecoder",
+      "key": "cognitiveai",
       "points": 10,
-      "description": "人人都是Vibe Coder"
+      "description": "基于认知心理学的AI自成长记忆系统"
     },
     {
-      "key": "vibecoding",
+      "key": "devecosystem",
       "points": 10,
-      "description": "Zy的Vibe Coding思考"
+      "description": "构筑大模型开发者成长新生态"
     },
     {
       "key": "checkin1330",
@@ -101,14 +101,14 @@
       "description": "产品反馈贡献者"
     },
     {
-      "key": "at14",
+      "key": "cursorofficial",
       "points": 10,
-      "description": "14岁创业的勇气与智慧"
+      "description": "Cursor官方分享环节"
     },
     {
-      "key": "travel",
+      "key": "aipartnership",
       "points": 10,
-      "description": "DH的旅行产品创新"
+      "description": "AI项目合作实践分享"
     },
     {
       "key": "volunteer",
@@ -118,12 +118,12 @@
     {
       "key": "hashtagmaster",
       "points": 10,
-      "description": "CursorMeetupHangzhou话题达人"
+      "description": "CursorMeetupNanjing话题达人"
     },
     {
-      "key": "yuchen",
+      "key": "buildingsystem",
       "points": 10,
-      "description": "与YuChen的特别连接"
+      "description": "开发者生态建设思考"
     },
     {
       "key": "tshirtwinner",
