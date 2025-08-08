@@ -309,7 +309,7 @@ const Home: React.FC = () => {
                       <br />
                       <div className="text-sm mt-2 space-y-2">
                         <div>
-                          • 转发报名公众号文章到
+                          • 转发公众号文章到
                           <span className="font-bold">朋友圈</span>
                           <br />
                           <a
