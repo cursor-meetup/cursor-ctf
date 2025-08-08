@@ -151,10 +151,10 @@ const Venue = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6 mt-6 border border-gray-100">
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              今日活动时间表
+              8月9日活动议程
             </h3>
             <p className="text-gray-600 text-sm">
-              Cursor Meetup Nanjing 完整议程
+              Cursor Meetup Nanjing · 让开发更高效，让创造更简单
             </p>
           </div>
           <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -171,7 +171,7 @@ const Venue = () => {
                 13:30-14:00
               </div>
               <div className="flex-1 text-sm text-gray-800">
-                签到入场，扫码签到+名牌贴纸+领取伴手礼，合影打卡区
+                签到入场，扫码签到，领取名牌贴纸
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
@@ -182,9 +182,58 @@ const Venue = () => {
                 开场致辞，AICoding团队介绍+南京站活动意义
               </div>
             </div>
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-24 text-sm font-medium text-green-700">
+                14:30-15:30
+              </div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">内容分享（上半场）</div>
+                <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
+                  <li>
+                    <strong>孙伟局长</strong>
+                    ：《建邺赋能：构筑大模型开发者成长新生态》
+                  </li>
+                  <li>
+                    <strong>张华枫博士</strong>：《自定义MCP工具加速软件开发》
+                  </li>
+                  <li>
+                    <strong>崔骏</strong>：《Cursor
+                    赋能产品原型高效生成，提升需求对接转换率》
+                  </li>
+                  <li>预留Q&A时间</li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 p-3 bg-orange-50 rounded-lg">
+              <div className="flex-shrink-0 w-24 text-sm font-medium text-orange-700">
+                15:30-15:50
+              </div>
+              <div className="flex-1 text-sm text-gray-800">
+                下午茶自由交流，Cursor项目演示，参与抽奖
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+              <div className="flex-shrink-0 w-24 text-sm font-medium text-green-700">
+                15:50-16:50
+              </div>
+              <div className="flex-1 text-sm text-gray-800">
+                <div className="font-medium mb-1">内容分享（下半场）</div>
+                <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
+                  <li>
+                    <strong>高恒</strong>：《用 Cursor
+                    一站式完成AI项目从开发到部署：技巧与实践》
+                  </li>
+                  <li>
+                    <strong>姜山SEAN</strong>：《基于认知心理学原理的 AI
+                    自成长记忆系统》
+                  </li>
+                  <li>预留Q&A时间</li>
+                </ul>
+              </div>
+            </div>
             <div className="flex items-start space-x-3 p-3 bg-pink-50 rounded-lg">
               <div className="flex-shrink-0 w-24 text-sm font-medium text-pink-700">
-                14:30-15:00
+                16:50-17:20
               </div>
               <div className="flex-1 text-sm text-gray-800">
                 官方Q&A & 神秘环节：Cursor官方分享
@@ -192,49 +241,12 @@ const Venue = () => {
             </div>
             <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg">
               <div className="flex-shrink-0 w-24 text-sm font-medium text-yellow-700">
-                15:00-15:10
+                17:20-17:30
               </div>
               <div className="flex-1 text-sm text-gray-800">合影留念</div>
             </div>
-            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
-              <div className="flex-shrink-0 w-24 text-sm font-medium text-green-700">
-                15:10-16:10
-              </div>
-              <div className="flex-1 text-sm text-gray-800">
-                <div className="font-medium mb-1">内容分享（上半场）</div>
-                <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
-                  <li>《建邺赋能：构筑大模型开发者成长新生态》</li>
-                  <li>《自定义 MCP 工具加速软件开发》</li>
-                  <li>《Cursor 赋能产品原型高效生成，提升需求对接转换率》</li>
-                  <li>预留Q&A时间</li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3 p-3 bg-orange-50 rounded-lg">
-              <div className="flex-shrink-0 w-24 text-sm font-medium text-orange-700">
-                16:10-16:30
-              </div>
-              <div className="flex-1 text-sm text-gray-800">
-                下午茶自由交流，项目展示，扫码加社群
-              </div>
-            </div>
-            <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
-              <div className="flex-shrink-0 w-24 text-sm font-medium text-green-700">
-                16:30-17:30
-              </div>
-              <div className="flex-1 text-sm text-gray-800">
-                <div className="font-medium mb-1">内容分享（下半场）</div>
-                <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
-                  <li>
-                    《用 Cursor 一站式完成 AI 项目从开发到部署：技巧与实践》
-                  </li>
-                  <li>《基于认知心理学原理的 AI 自成长记忆系统》</li>
-                  <li>预留Q&A时间</li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3 p-3 bg-pink-50 rounded-lg">
-              <div className="flex-shrink-0 w-24 text-sm font-medium text-pink-700">
+            <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="flex-shrink-0 w-24 text-sm font-medium text-gray-700">
                 17:30-18:00
               </div>
               <div className="flex-1 text-sm text-gray-800">

@@ -300,6 +300,23 @@ const Home: React.FC = () => {
                       <span className="font-bold">微信群</span>
                       ，参与交流获取微信群专属flag
                       <br />
+                      <div className="flex justify-center mt-3 mb-3">
+                        <img
+                          src="https://jgn.oss-cn-beijing.aliyuncs.com/cursor/qun1.jpg"
+                          alt="微信群二维码"
+                          className="w-64 h-64 object-contain rounded-lg border border-gray-200 max-w-full"
+                        />
+                      </div>
+                      <div className="text-xs text-gray-600 text-center mb-2">
+                        如果微信群满请联系山鬼：
+                      </div>
+                      <div className="flex justify-center mb-3">
+                        <img
+                          src="https://jgn.oss-cn-beijing.aliyuncs.com/cursor/shanguiwx.jpg"
+                          alt="山鬼微信二维码"
+                          className="w-56 h-56 object-contain rounded-lg border border-gray-200 max-w-full"
+                        />
+                      </div>
                       <span className="text-indigo-600 font-medium">
                         💜 群内专属flag等你来发现
                       </span>
