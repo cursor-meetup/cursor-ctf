@@ -349,7 +349,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400">
                       <span className="font-bold">❻</span>{' '}
-                      收集flag，积分排名前20可兑换纪念币
+                      收集flag，积分排名前20可兑换纪念币，积分排名前3可兑换Cursor专属T恤！
                       <br />
                       <span className="text-purple-600 font-medium">
                         💜 Flag收集挑战，冲击前20名！
