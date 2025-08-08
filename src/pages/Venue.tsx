@@ -110,17 +110,14 @@ const Venue = () => {
         </div>
 
         {/* 功能按钮 */}
-        <div className="space-y-3 mb-4">
+        {/* <div className="space-y-3 mb-4">
           <button
             onClick={handleShowDetails}
             className="w-full py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200"
           >
             {showDetails ? '收起路线指引' : '查看路线指引'}
           </button>
-          {/* <button className="w-full py-3 bg-white text-black font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors duration-200">
-            预订场地
-          </button> */}
-        </div>
+        </div> */}
 
         {/* 详细信息展示区域 */}
         {showDetails && (

@@ -287,45 +287,56 @@ const Home: React.FC = () => {
                   </h4>
                   <div className="space-y-3">
                     <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
-                      <span className="font-bold">❶</span>{' '}
-                      在本页面注册账号参与抽奖活动和积分排名
+                      <span className="font-bold">❶</span> 在本页面
+                      <span className="font-bold">注册账号</span>
+                      参与抽奖活动和积分排名
                       <br />
                       <span className="text-blue-600 font-medium">
                         💙 输入正确的flag可以获取积分
                       </span>
                     </div>
                     <div className="bg-indigo-50 p-3 rounded-lg border-l-4 border-indigo-400">
-                      <span className="font-bold">❷</span>{' '}
-                      加入现场微信群，参与交流获取微信群专属flag
+                      <span className="font-bold">❷</span> 加入现场
+                      <span className="font-bold">微信群</span>
+                      ，参与交流获取微信群专属flag
                       <br />
                       <span className="text-indigo-600 font-medium">
                         💜 群内专属flag等你来发现
                       </span>
                     </div>
                     <div className="bg-pink-50 p-3 rounded-lg border-l-4 border-pink-400">
-                      <span className="font-bold">❸</span>{' '}
-                      转发报名公众号文章到朋友圈
+                      <span className="font-bold">❸</span> 社交平台分享任务：
                       <br />
-                      <span className="text-sm text-gray-600 mb-1">
-                        转发后截图并携带本次活动注册的用户名发送到现场群中，以便官方人员为您添加积分
-                      </span>
-                      <br />
-                      <span className="text-pink-600 font-medium">
-                        💖 领取1款限量贴纸
-                      </span>
-                    </div>
-                    <div className="bg-yellow-50 p-3 rounded-lg border-l-4 border-yellow-400">
-                      <span className="font-bold">❹</span> 在{' '}
-                      <span className="font-semibold">即刻</span> 或{' '}
-                      <span className="font-semibold">小红书</span>{' '}
-                      分享参会瞬间，并且附带#CursorMeetupNanjing标签
+                      <div className="text-sm mt-2 space-y-1">
+                        <div>
+                          • 转发报名公众号文章到
+                          <span className="font-bold">朋友圈</span>
+                        </div>
+                        <div>
+                          • 在 <span className="font-semibold">即刻</span> 或{' '}
+                          <span className="font-semibold">小红书</span>{' '}
+                          分享参会瞬间，并附带#CursorMeetupNanjing标签
+                        </div>
+                      </div>
                       <br />
                       <span className="text-sm text-gray-600 mb-1">
                         分享后截图并携带本次活动注册的用户名发送到现场群中，以便官方人员为您添加积分
                       </span>
                       <br />
-                      <span className="text-yellow-600 font-medium">
-                        💛 领取1款限量贴纸
+                      <span className="text-pink-600 font-medium">
+                        💖 完成任一平台分享可领取纪念币或贴纸
+                      </span>
+                      <br />
+                      <span className="text-xs text-gray-500">
+                        （每人限领一份，纪念币或贴纸，先到先得发完即止）
+                      </span>
+                    </div>
+                    <div className="bg-orange-50 p-3 rounded-lg border-l-4 border-orange-400">
+                      <span className="font-bold">❹</span> 参与嘉宾现场
+                      <span className="font-bold">Q&A问答</span>
+                      <br />
+                      <span className="text-orange-600 font-medium">
+                        🧡 获取纪念币+贴纸双重奖励
                       </span>
                     </div>
                     <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-400">
