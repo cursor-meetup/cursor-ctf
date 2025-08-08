@@ -235,9 +235,7 @@ const Venue = () => {
               <div className="flex-shrink-0 w-24 text-sm font-medium text-pink-700">
                 16:50-17:20
               </div>
-              <div className="flex-1 text-sm text-gray-800">
-                官方Q&A & 神秘环节：Cursor官方分享
-              </div>
+              <div className="flex-1 text-sm text-gray-800">官方Q&A</div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg">
               <div className="flex-shrink-0 w-24 text-sm font-medium text-yellow-700">
