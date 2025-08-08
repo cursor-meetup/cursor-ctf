@@ -307,10 +307,19 @@ const Home: React.FC = () => {
                     <div className="bg-pink-50 p-3 rounded-lg border-l-4 border-pink-400">
                       <span className="font-bold">❸</span> 社交平台分享任务：
                       <br />
-                      <div className="text-sm mt-2 space-y-1">
+                      <div className="text-sm mt-2 space-y-2">
                         <div>
                           • 转发报名公众号文章到
                           <span className="font-bold">朋友圈</span>
+                          <br />
+                          <a
+                            href="https://mp.weixin.qq.com/s/Y8Huw2_zaOJ9i6qDW-ociw?scene=1&click_id=1"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block mt-1 px-3 py-1 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition-colors duration-200 text-xs"
+                          >
+                            📱 南京首场 Cursor Meetup！
+                          </a>
                         </div>
                         <div>
                           • 在 <span className="font-semibold">即刻</span> 或{' '}
@@ -339,8 +348,30 @@ const Home: React.FC = () => {
                         🧡 获取纪念币+贴纸双重奖励
                       </span>
                     </div>
+                    <div className="bg-cyan-50 p-3 rounded-lg border-l-4 border-cyan-400">
+                      <span className="font-bold">❺</span> 在
+                      <span className="font-bold">15:00之前</span>填写问卷
+                      <br />
+                      <span className="text-sm text-gray-600 mt-1 mb-2">
+                        有关于Cursor或者AI
+                        Coding您最想了解的问题，我们会挑选总结部分问题现场为你解答
+                      </span>
+                      <br />
+                      <a
+                        href="https://aicoding.feishu.cn/share/base/form/shrcnN2Ngnhhj1bspWTet09Yzhh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors duration-200 text-sm"
+                      >
+                        📋 点击填写问卷
+                      </a>
+                      <br />
+                      <span className="text-cyan-600 font-medium mt-2">
+                        💎 问题被采纳可获得额外奖励
+                      </span>
+                    </div>
                     <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-400">
-                      <span className="font-bold">❺</span>{' '}
+                      <span className="font-bold">❻</span>{' '}
                       嘉宾PPT/活动文案中寻找隐藏Flag
                       <br />
                       <span className="text-green-600 font-medium">
@@ -348,7 +379,7 @@ const Home: React.FC = () => {
                       </span>
                     </div>
                     <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400">
-                      <span className="font-bold">❻</span>{' '}
+                      <span className="font-bold">❼</span>{' '}
                       收集flag，积分排名前20可兑换纪念币，积分排名前3可兑换Cursor专属T恤！
                       <br />
                       <span className="text-purple-600 font-medium">
