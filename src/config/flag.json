@@ -184,6 +184,11 @@
       "key": "wechatshare008",
       "points": 30,
       "description": "朋友圈分享达人"
+    },
+    {
+      "key": "cursorqa",
+      "points": 10,
+      "description": "问卷填写专属奖励"
     }
   ]
 }
