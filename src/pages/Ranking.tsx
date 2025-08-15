@@ -22,14 +22,10 @@ const Ranking: React.FC = () => {
   const checkPrizeEligibility = () => {
     if (!userRanking) return false;
 
-    // 检查当前时间是否在17:00之后
-    const currentHour = currentTime.getHours();
-    const isAfter17 = currentHour >= 17;
+    // 检查排名是否在前50
+    const isTop50 = userRanking.rank <= 50;
 
-    // 检查排名是否在前20
-    const isTop20 = userRanking.rank <= 20;
-
-    return isAfter17 && isTop20;
+    return isTop50;
   };
 
   // 获取领奖按钮的状态和文本
