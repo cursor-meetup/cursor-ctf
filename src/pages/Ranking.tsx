@@ -46,15 +46,13 @@ const Ranking: React.FC = () => {
       };
     }
 
-    const currentHour = currentTime.getHours();
-    const isAfter17 = currentHour >= 17;
-    const isTop20 = userRanking.rank <= 150;
+    const isTop50 = userRanking.rank <= 50;
 
-    // 排名不在前20
-    if (!isTop20 || !isAfter17) {
+    // 排名不在前50
+    if (!isTop50) {
       return {
         disabled: true,
-        text: ' 17:00后，排名前150名可以领取Cursor纪念币',
+        text: '排名前50名可以领取Cursor纪念币/卡片',
         className: 'bg-gray-400 cursor-not-allowed',
       };
     }
@@ -62,7 +60,7 @@ const Ranking: React.FC = () => {
     // 满足条件，可以领取
     return {
       disabled: false,
-      text: '🎁 领取奖励',
+      text: '🎁 兑换奖励',
       className:
         'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg',
     };
@@ -399,8 +397,10 @@ const Ranking: React.FC = () => {
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="text-center mb-6">
               <div className="text-6xl mb-4">🎁</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">领取奖励</h3>
-              <p className="text-gray-600">确认领取您的奖励吗？</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                请联系工作人员领取奖励
+              </h3>
+              <p className="text-gray-600">领取到奖励再点击按钮</p>
             </div>
 
             {prizeError && (
