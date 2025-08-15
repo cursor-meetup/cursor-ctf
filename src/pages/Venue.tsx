@@ -10,7 +10,7 @@ const Venue = () => {
 
   const handleLumaSignIn = () => {
     // 这里先用一个示例链接，您可以稍后替换为实际的luma链接
-    const lumaUrl = 'https://lu.ma/rpeixzgx'; // 请替换为实际的luma链接
+    const lumaUrl = 'https://lu.ma/hsuzdjwv'; // 请替换为实际的luma链接
     window.open(lumaUrl, '_blank');
   };
 
