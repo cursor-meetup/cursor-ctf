@@ -110,9 +110,9 @@ const Admin: React.FC = () => {
                 </button>
                 <button
                   onClick={() => handleQuickSelect('share007')}
-                  className="px-4 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 rounded-lg transition-all duration-200 font-medium text-center"
+                  className="px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 rounded-lg transition-all duration-200 font-medium text-center"
                 >
-                  🎤 嘉宾分享之星 (30分)
+                  🐦 推特分享之星 (30分)
                 </button>
                 <button
                   onClick={() => handleQuickSelect('wechatshare008')}

@@ -330,7 +330,7 @@ const Home: React.FC = () => {
                           <span className="font-bold">朋友圈</span>
                           <br />
                           <a
-                            href="https://mp.weixin.qq.com/s/Y8Huw2_zaOJ9i6qDW-ociw?scene=1&click_id=1"
+                            href="https://mp.weixin.qq.com/s/bU9ktlX22S0s_rf6WS_IfA"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-block mt-1 px-3 py-1 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition-colors duration-200 text-xs"
