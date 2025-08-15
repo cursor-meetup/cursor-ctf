@@ -70,14 +70,14 @@ const Venue = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
           <div className="w-full rounded-xl overflow-hidden mb-4">
             <a
-              href="https://www.amap.com/place/B0J0UH5U3Y"
+              href="https://www.amap.com/place/B0FFGLCJNF"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:opacity-90 transition-opacity duration-200"
             >
               <img
-                src="https://restapi.amap.com/v3/staticmap?location=118.737533,31.980701&zoom=17&size=750*400&markers=mid,,A:118.737533,31.980701&key=009dbec2a6e19d47163882e3f1a61541"
-                alt="场地位置地图 - 上海市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅"
+                src="https://restapi.amap.com/v3/staticmap?location=121.605347,31.216252&zoom=17&size=750*400&markers=mid,,A:121.605347,31.216252&key=009dbec2a6e19d47163882e3f1a61541"
+                alt="场地位置地图 - 上海市浦东新区浦东软件园郭守敬园-2号楼 2楼报告厅"
                 className="w-full h-auto object-cover cursor-pointer"
                 style={{ aspectRatio: '750/400' }}
               />
@@ -90,7 +90,7 @@ const Venue = () => {
                 Cursor Meetup Shanghai场地
               </h3>
               <p className="text-gray-600">
-                地址：上海市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅
+                地址：上海市浦东新区浦东软件园郭守敬园-2号楼 2楼报告厅
               </p>
             </div>
 
@@ -98,7 +98,7 @@ const Venue = () => {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-500">容量：</span>
-                  <span className="font-medium">300人</span>
+                  <span className="font-medium">400人</span>
                 </div>
                 <div>
                   <span className="text-gray-500">状态：</span>
