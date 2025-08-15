@@ -151,7 +151,7 @@ const Venue = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6 mt-6 border border-gray-100">
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              8月9日活动议程
+              8月16日活动议程
             </h3>
             <p className="text-gray-600 text-sm">
               Cursor Meetup Shanghai · 让开发更高效，让创造更简单
