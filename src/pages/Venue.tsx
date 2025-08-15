@@ -157,7 +157,7 @@ const Venue = () => {
               Cursor Meetup Shanghai · 让开发更高效，让创造更简单
             </p>
           </div>
-          <div className="space-y-4 max-h-96 overflow-y-auto">
+          <div className="space-y-4">
             <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
               <div className="flex-shrink-0 w-24 text-sm font-medium text-blue-700">
                 13:00-13:30
