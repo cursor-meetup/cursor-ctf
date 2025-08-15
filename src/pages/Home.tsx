@@ -283,7 +283,7 @@ const Home: React.FC = () => {
                 {/* 互动任务 */}
                 <div>
                   <h4 className="font-bold text-base mb-3 text-pink-600">
-                    互动任务 & 贴纸/纪念币领取攻略
+                    互动任务 & 限量纪念币/卡片领取攻略
                   </h4>
                   <div className="space-y-3">
                     <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
@@ -339,8 +339,9 @@ const Home: React.FC = () => {
                           </a>
                         </div>
                         <div>
-                          • 在 <span className="font-semibold">即刻</span> 或{' '}
-                          <span className="font-semibold">小红书</span>{' '}
+                          • 在 <span className="font-semibold">即刻</span> /{' '}
+                          <span className="font-semibold">小红书</span> /{' '}
+                          <span className="font-semibold">推特</span>{' '}
                           分享参会瞬间，并附带#CursorMeetupShanghai标签
                         </div>
                       </div>
@@ -350,11 +351,11 @@ const Home: React.FC = () => {
                       </span>
                       <br />
                       <span className="text-pink-600 font-medium">
-                        💖 完成任一平台分享可领取纪念币或贴纸
+                        💖 完成任一平台分享可领取纪念币或卡片
                       </span>
                       <br />
                       <span className="text-xs text-gray-500">
-                        （每人限领一份，纪念币或贴纸，先到先得发完即止）
+                        （每人限领一份，二选一，先到先得发完即止）
                       </span>
                     </div>
                     <div className="bg-orange-50 p-3 rounded-lg border-l-4 border-orange-400">
@@ -362,31 +363,13 @@ const Home: React.FC = () => {
                       <span className="font-bold">Q&A问答</span>
                       <br />
                       <span className="text-orange-600 font-medium">
-                        🧡 获取纪念币+贴纸双重奖励
+                        🧡 获取纪念币+卡片奖励各一份
                       </span>
                     </div>
                     <div className="bg-cyan-50 p-3 rounded-lg border-l-4 border-cyan-400">
                       <span className="font-bold">❺</span> 填写问卷任务：
                       <br />
                       <div className="text-sm mt-2 space-y-3">
-                        <div>
-                          • 在<span className="font-bold">15:00之前</span>
-                          填写问题收集问卷
-                          <br />
-                          <span className="text-xs text-gray-600 mt-1">
-                            有关于Cursor或者AI
-                            Coding您最想了解的问题，我们会挑选总结部分问题现场为你解答
-                          </span>
-                          <br />
-                          <a
-                            href="https://aicoding.feishu.cn/share/base/form/shrcnN2Ngnhhj1bspWTet09Yzhh"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block mt-1 px-3 py-1 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors duration-200 text-xs"
-                          >
-                            📋 问题收集问卷
-                          </a>
-                        </div>
                         <div>
                           • 活动结束后填写反馈问卷
                           <br />
@@ -404,7 +387,6 @@ const Home: React.FC = () => {
                           </a>
                         </div>
                       </div>
-                      <br />
                       <span className="text-cyan-600 font-medium">
                         💎 您的建议对我们十分重要！
                       </span>
@@ -419,10 +401,10 @@ const Home: React.FC = () => {
                     </div>
                     <div className="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400">
                       <span className="font-bold">❼</span>{' '}
-                      收集flag，积分排名前20可兑换纪念币，积分排名前3可兑换Cursor专属T恤！
+                      收集flag，积分排名前50可兑换纪念币/卡片，积分排名前5可兑换Cursor专属T恤！
                       <br />
                       <span className="text-purple-600 font-medium">
-                        💜 Flag收集挑战，冲击前20名！
+                        💜 Flag收集挑战，冲击前50名！
                       </span>
                     </div>
                   </div>
