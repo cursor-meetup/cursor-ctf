@@ -163,7 +163,7 @@ const Venue = () => {
                 13:00-13:30
               </div>
               <div className="flex-1 text-sm text-gray-800">
-                签到入场，加入Meetup现场群，扫码签到+领取贴纸，项目体验
+                签到入场，加入Meetup现场群，扫码签到+领取贴纸
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
@@ -224,7 +224,7 @@ const Venue = () => {
                 15:30-15:50
               </div>
               <div className="flex-1 text-sm text-gray-800">
-                抽奖环节 + 大合照 + 休息时间，下午茶自由交流
+                抽奖环节 + 大合照 + 休息时间，自由交流
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
