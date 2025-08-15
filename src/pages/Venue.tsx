@@ -15,7 +15,7 @@ const Venue = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 relative">
+    <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 pb-safe relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
 

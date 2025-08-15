@@ -200,7 +200,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gray-50 relative">
+    <div className="min-h-screen pt-20 pb-safe bg-gray-50 relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
 
@@ -225,7 +225,7 @@ const Home: React.FC = () => {
         )}
       </div>
 
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 pb-20">
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 pb-20 pb-safe">
         <div className="w-full max-w-md">
           {/* 标题 */}
           <div className="text-center mb-8">

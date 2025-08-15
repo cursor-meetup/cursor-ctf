@@ -94,7 +94,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 pb-20 bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="min-h-screen relative flex items-center justify-center p-4 pb-20 pb-safe bg-gradient-to-br from-gray-100 to-gray-200">
       {/* 流星雨效果 */}
       <MeteorBackground />
 

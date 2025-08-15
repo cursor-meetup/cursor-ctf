@@ -43,7 +43,7 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden pb-safe">
       <MeteorBackground />
       
       <div className="relative z-10 p-6 max-w-4xl mx-auto">
