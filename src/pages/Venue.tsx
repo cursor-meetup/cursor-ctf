@@ -190,17 +190,32 @@ const Venue = () => {
                 <div className="font-medium mb-1">内容分享（上半场）</div>
                 <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
                   <li>
-                    <strong>孙伟局长</strong>
-                    ：《建邺赋能：构筑大模型开发者成长新生态》
+                    <strong>Calvin / AWS Startups</strong>：《非开发者的 Vibe
+                    Coding 踩坑之路》
+                    <br />
+                    <span className="text-gray-500">
+                      用"外行人"视角，告诉你在 Vibe Coding
+                      旅程中容易掉的坑，以及如何绕过去。
+                    </span>
                   </li>
                   <li>
-                    <strong>张华枫博士</strong>：《自定义MCP工具加速软件开发》
+                    <strong>陆彦达 / 飞书深诺研发总监</strong>：《V0 + Cursor
+                    如何最快速度开发企业工具型项目》
+                    <br />
+                    <span className="text-gray-500">
+                      实战拆解如何用 AI 工具链快速起盘，从 0 到 MVP
+                      的全流程加速器。
+                    </span>
                   </li>
                   <li>
-                    <strong>崔骏</strong>：《Cursor
-                    赋能产品原型高效生成，提升需求对接转换率》
+                    <strong>好记星 / 前得物增长前端负责人</strong>：《玩转
+                    Cursor Memories 打造带全局记忆的私人 Cursor》
+                    <br />
+                    <span className="text-gray-500">
+                      深入魔改 Cursor，让它变成你的私人
+                      Chatbot，并记住每一次对话的"前因后果"。
+                    </span>
                   </li>
-                  <li>预留Q&A时间</li>
                 </ul>
               </div>
             </div>
@@ -209,7 +224,7 @@ const Venue = () => {
                 15:30-15:50
               </div>
               <div className="flex-1 text-sm text-gray-800">
-                下午茶自由交流，Cursor项目演示，参与抽奖
+                抽奖环节 + 大合照 + 休息时间，下午茶自由交流
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
@@ -220,14 +235,30 @@ const Venue = () => {
                 <div className="font-medium mb-1">内容分享（下半场）</div>
                 <ul className="list-disc pl-5 text-xs text-gray-700 space-y-1">
                   <li>
-                    <strong>高恒</strong>：《用 Cursor
-                    一站式完成AI项目从开发到部署：技巧与实践》
+                    <strong>孟健 / AI 畅销书作者</strong>：《Cursor + MCP
+                    深度实践》
+                    <br />
+                    <span className="text-gray-500">
+                      详解 MCP 协议的应用场景，让你的 AI 开发体验沉浸且高效。
+                    </span>
                   </li>
                   <li>
-                    <strong>姜山SEAN</strong>：《基于认知心理学原理的 AI
-                    自成长记忆系统》
+                    <strong>黄巍 / Refly AI Founder & CEO</strong>：《从 Cursor
+                    到全栈创作：AI Native 团队如何用 5 个人创造 4.2K stars
+                    开源项目》
+                    <br />
+                    <span className="text-gray-500">
+                      分享一个小团队如何用 AI 工具撬动巨大的产出与影响力。
+                    </span>
                   </li>
-                  <li>预留Q&A时间</li>
+                  <li>
+                    <strong>魏知 / 金融科技公司 AI 企业转型项目负责人</strong>
+                    ：《AI 时代的个人战略：如何在企业转型中找到职业新赛道》
+                    <br />
+                    <span className="text-gray-500">
+                      帮你在行业巨变中找到自己的位置，抓住新机遇。
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -235,17 +266,17 @@ const Venue = () => {
               <div className="flex-shrink-0 w-24 text-sm font-medium text-pink-700">
                 16:50-17:20
               </div>
-              <div className="flex-1 text-sm text-gray-800">官方Q&A</div>
-            </div>
-            <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg">
-              <div className="flex-shrink-0 w-24 text-sm font-medium text-yellow-700">
-                17:20-17:30
+              <div className="flex-1 text-sm text-gray-800">
+                现场互动 Q&A 环节
+                <br />
+                <span className="text-gray-500">
+                  10 个 QA 环节，开放提问，现场船新玩法保证过瘾！
+                </span>
               </div>
-              <div className="flex-1 text-sm text-gray-800">合影留念</div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
               <div className="flex-shrink-0 w-24 text-sm font-medium text-gray-700">
-                17:30-18:00
+                17:20-18:00
               </div>
               <div className="flex-1 text-sm text-gray-800">
                 自由交流+离场，开放1v1咨询，收集反馈问卷
