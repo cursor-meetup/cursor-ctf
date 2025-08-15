@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   // 隐藏区域点击计数
   const [clickCount, setClickCount] = useState(0);
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
@@ -44,7 +44,7 @@ const Login = () => {
     const timeout = setTimeout(() => {
       setClickCount(0);
     }, 2000);
-    
+
     setClickTimeout(timeout);
   };
 
@@ -81,7 +81,7 @@ const Login = () => {
 
     try {
       await authService.login(username.trim(), password);
-      
+
       // 调用上下文的 login 方法来更新全局状态
       login();
       navigate('/');
@@ -99,7 +99,7 @@ const Login = () => {
       <MeteorBackground />
 
       {/* 隐藏的左上角点击区域 */}
-      <div 
+      <div
         onClick={handleHiddenAreaClick}
         className="absolute top-4 left-4 w-16 h-16 z-50 cursor-default opacity-0 hover:opacity-10 transition-opacity duration-300"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
@@ -112,7 +112,7 @@ const Login = () => {
         <div className="text-center mb-8 animate-fade-in">
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-2 animate-float-title">
-              Cursor Meetup Nanjing
+              Cursor Meetup Shanghai
             </h1>
             <p className="text-gray-700 text-sm">
               登录您的账户（新用户将自动注册）
@@ -125,7 +125,10 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* 用户名输入 */}
             <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-700"
+              >
                 用户名
               </label>
               <p className="text-xs text-gray-500">
@@ -152,7 +155,10 @@ const Login = () => {
 
             {/* 密码输入 */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 密码
               </label>
               <p className="text-xs text-gray-500">
@@ -197,20 +203,17 @@ const Login = () => {
 
           {/* 说明文字 */}
           <div className="mt-6 text-center space-y-1">
-            <p className="text-sm text-gray-600">
-              首次使用将自动创建账户
-            </p>
-     
+            <p className="text-sm text-gray-600">首次使用将自动创建账户</p>
           </div>
         </div>
 
         {/* 底部装饰 */}
         <div className="text-center mt-8 text-xs text-gray-600">
-          © 2025 Cursor Meetup Nanjing
+          © 2025 Cursor Meetup Shanghaii
         </div>
       </div>
     </div>
   );
 };
 
-export default Login; 
+export default Login;

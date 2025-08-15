@@ -77,7 +77,7 @@ const Venue = () => {
             >
               <img
                 src="https://restapi.amap.com/v3/staticmap?location=118.737533,31.980701&zoom=17&size=750*400&markers=mid,,A:118.737533,31.980701&key=009dbec2a6e19d47163882e3f1a61541"
-                alt="场地位置地图 - 南京市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅"
+                alt="场地位置地图 - 上海市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅"
                 className="w-full h-auto object-cover cursor-pointer"
                 style={{ aspectRatio: '750/400' }}
               />
@@ -87,10 +87,10 @@ const Venue = () => {
           <div className="space-y-4">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Cursor Meetup Nanjing场地
+                Cursor Meetup Shanghai场地
               </h3>
               <p className="text-gray-600">
-                地址：南京市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅
+                地址：上海市建邺区白龙江东街9号金鱼嘴基金大厦15楼未来路演厅
               </p>
             </div>
 
@@ -154,7 +154,7 @@ const Venue = () => {
               8月9日活动议程
             </h3>
             <p className="text-gray-600 text-sm">
-              Cursor Meetup Nanjing · 让开发更高效，让创造更简单
+              Cursor Meetup Shanghai · 让开发更高效，让创造更简单
             </p>
           </div>
           <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -179,7 +179,7 @@ const Venue = () => {
                 14:20-14:30
               </div>
               <div className="flex-1 text-sm text-gray-800">
-                开场致辞，AICoding团队介绍+南京站活动意义
+                开场致辞，AICoding团队介绍+上海站活动意义
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">

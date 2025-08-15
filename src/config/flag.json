@@ -1,9 +1,9 @@
 {
   "flags": [
     {
-      "key": "njcursor2025",
+      "key": "cursor2025sh",
       "points": 10,
-      "description": "欢迎来到 Cursor Meetup Nanjing"
+      "description": "欢迎来到 Cursor Meetup Shanghai"
     },
     {
       "key": "efficientdev",
@@ -33,7 +33,7 @@
     {
       "key": "aicodingteam",
       "points": 10,
-      "description": "AICoding团队介绍+南京站活动意义"
+      "description": "AICoding团队介绍+上海站活动意义"
     },
     {
       "key": "mcptools",
@@ -118,7 +118,7 @@
     {
       "key": "hashtagmaster",
       "points": 10,
-      "description": "CursorMeetupNanjing话题达人"
+      "description": "CursorMeetupShanghai话题达人"
     },
     {
       "key": "buildingsystem",

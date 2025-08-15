@@ -235,7 +235,7 @@ const Home: React.FC = () => {
               </p>
             )}
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Cursor Meetup Nanjing
+              Cursor Meetup Shanghai
             </h1>
             <p className="text-gray-600">请输入正确的口令以继续</p>
             {totalPoints > 0 && (
@@ -261,7 +261,7 @@ const Home: React.FC = () => {
               type="submit"
               disabled={loading}
               className={`w-full py-4 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 text-lg disabled:opacity-50 disabled:cursor-not-allowed ${
-                input === 'njcursor2025' ? 'animate-pulse-scale' : ''
+                input === 'cursor2025sh' ? 'animate-pulse-scale' : ''
               }`}
             >
               {loading ? '验证中...' : '提交验证'}
@@ -335,13 +335,13 @@ const Home: React.FC = () => {
                             rel="noopener noreferrer"
                             className="inline-block mt-1 px-3 py-1 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition-colors duration-200 text-xs"
                           >
-                            公众号：南京首场 Cursor Meetup！
+                            公众号：上海首场 Cursor Meetup！
                           </a>
                         </div>
                         <div>
                           • 在 <span className="font-semibold">即刻</span> 或{' '}
                           <span className="font-semibold">小红书</span>{' '}
-                          分享参会瞬间，并附带#CursorMeetupNanjing标签
+                          分享参会瞬间，并附带#CursorMeetupShanghai标签
                         </div>
                       </div>
                       <br />
@@ -435,18 +435,18 @@ const Home: React.FC = () => {
                     fun！
                   </p>
                   <div className="bg-white p-3 rounded border border-dashed border-purple-300 text-center font-mono text-sm text-purple-700 mb-3">
-                    njcursor2025
+                    cursor2025sh
                   </div>
                   <button
                     onClick={() => {
                       navigator.clipboard
-                        .writeText('njcursor2025')
+                        .writeText('cursor2025sh')
                         .then(() => {
-                          setInput('njcursor2025');
+                          setInput('cursor2025sh');
                           alert('Flag已复制并填入输入框！');
                         })
                         .catch(() => {
-                          alert('复制失败，请手动复制：njcursor2025');
+                          alert('复制失败，请手动复制：cursor2025sh');
                         });
                     }}
                     className="w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 text-sm"
