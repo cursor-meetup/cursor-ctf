@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import MeteorBackground from '../components/MeteorBackground';
 
 const Venue = () => {
+  const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
   const [showDetails, setShowDetails] = useState(false);
 
   const handleShowDetails = () => {
@@ -14,10 +18,34 @@ const Venue = () => {
     window.open(lumaUrl, '_blank');
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8 pb-20 pb-safe relative">
       {/* 流星雨背景 */}
       <MeteorBackground />
+
+      {/* 登录/退出按钮 */}
+      <div className="fixed top-4 right-4 z-50">
+        {currentUser ? (
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            退出登录
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('/login')}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors duration-200"
+          >
+            登录
+          </button>
+        )}
+      </div>
 
       <div className="max-w-md mx-auto relative">
         {/* 页面标题 */}
