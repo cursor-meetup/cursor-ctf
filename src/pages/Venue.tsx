@@ -37,7 +37,7 @@ const Venue = () => {
             </div>
 
             {/* Luma签到按钮 */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <button
                 onClick={handleLumaSignIn}
                 className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -51,7 +51,7 @@ const Venue = () => {
               <p className="text-xs text-gray-500 text-center mt-2">
                 请使用默认浏览器打开
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* 重要提示 */}
@@ -67,7 +67,7 @@ const Venue = () => {
         </div> */}
 
         {/* 场地信息卡片 */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
+        {/* <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
           <div className="w-full rounded-xl overflow-hidden mb-4">
             <a
               href="https://www.amap.com/place/B0FFGLCJNF"
@@ -107,7 +107,7 @@ const Venue = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* 功能按钮 */}
         {/* <div className="space-y-3 mb-4">
